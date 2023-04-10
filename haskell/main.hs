@@ -52,3 +52,25 @@ algunoEsCero :: Float -> Float -> Bool
 algunoEsCero 0 _ = True
 algunoEsCero _ 0 = True
 algunoEsCero _ _ = False
+
+--Ejercicio 2.f 
+mismoIntervalo :: Integer -> Integer -> Bool
+mismoIntervalo n1 n2  | n1<=3 && n2<=3 = True
+                      | (n1>3 && n2>3) && (n1<=7 && n2<=7) = True 
+                      | n1>7 && n2>7 = True
+                      | otherwise = False
+
+--Ejercicio 2.g (sin utilizar funciones para crear sets y prevenir repetidos)
+sumarDistintos :: Integer -> Integer -> Integer -> Integer 
+sumarDistintos n1 n2 n3 | n1 == n2 = n1 + n3 
+                        | n1 == n3 = n1 + n2 
+                        | n2 == n3 = n2 + n1
+                        | otherwise = n1 + n2 + n3
+
+--Ejercicio 2.h
+esMultiploDe :: Integer -> Integer -> Bool
+esMultiploDe n1 n2 = mod n1 n2 == 0
+
+--Ejercicio 2.i
+digitoUnidades :: Integer -> Integer
+digitoUnidades n1 =  mod n1 10
