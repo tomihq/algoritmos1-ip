@@ -169,4 +169,10 @@ bisiesto :: Integer -> Bool
 bisiesto anio | (not (esMultiploDe anio 4) || ((esMultiploDe anio 100) && (not (esMultiploDe anio 400)))) = False
               | otherwise = True
 
---Ejercicio 7.
+{- 
+    Ejercicio 7. distanciaManhattan. Recibo dos ternas de floats y retorno el valor absoluto de otro float (IMPORTANTE LO ULTIMO porque puede dar negativo y las distancias siempre son positivas). Reutilizo absoluto.
+    Preguntar: ¿Como haría para poder iterar las ternas sin tener que "separar la terna" en 3 fijamente? En este ejemplo si o si nos especifican que nos mandaran 3 valores por lo tanto sería innecesario pensar que podrían ingresar más, pero para saber :p
+-} 
+
+distanciaManhattan :: (Float, Float, Float) -> (Float, Float, Float) -> Float
+distanciaManhattan (p1, p2, p3) (q1, q2, q3) = abs((p1 - q1) + (p2 - q2) + (p3 - q3))
