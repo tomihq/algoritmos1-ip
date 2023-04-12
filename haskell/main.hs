@@ -81,8 +81,8 @@ digitoDecenas :: Integer -> Integer
 digitoDecenas n1 =  mod n1 100
 
 --Ejercicio 3 -- TODO. Buscar si existe un k que haga la ecuacion = 0 siempre y cuando k no sea 0.
---estanRelacionados :: Integer -> Integer -> Bool
---estanRelacionados n1 n2 = (n1 * n1) + (n1 * n2 * k) == 0
+estanRelacionados :: Integer -> Integer -> Bool
+estanRelacionados n1 n2 = n1 /=0 && n2 /= 0 && n1 * n1 + (n1*n2*(div (-n1) n2)) == 0
 
 --Ejercicio 4.a Producto interno (producto escalar) entre dos tuplas RxR = R2. (1, 2) (3, 4) = 3 * 1 + 2 * 4 = 11. Preguntar como usar los reales en Haskell.
 prodInt :: (Float, Float) -> (Float, Float) -> Float 
@@ -176,3 +176,7 @@ bisiesto anio | (not (esMultiploDe anio 4) || ((esMultiploDe anio 100) && (not (
 
 distanciaManhattan :: (Float, Float, Float) -> (Float, Float, Float) -> Float
 distanciaManhattan (p1, p2, p3) (q1, q2, q3) = abs((p1 - q1) + (p2 - q2) + (p3 - q3))
+
+{-
+    Ejercicio 8: Preguntar que significa el símbolo de "≺" NO es el simbolo de menor.
+-}
