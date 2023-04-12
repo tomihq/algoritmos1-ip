@@ -181,3 +181,11 @@ distanciaManhattan (p1, p2, p3) (q1, q2, q3) = abs((p1 - q1) + (p2 - q2) + (p3 -
 {-
     Ejercicio 8: Preguntar que significa el símbolo de "≺" NO es el simbolo de menor.
 -}
+
+sumaUltimosDosDigitos :: Integer -> Integer 
+sumaUltimosDosDigitos x = mod x 10 + (mod (div x 10) 10)
+
+comparar :: Integer -> Integer -> Integer
+comparar a b | sumaUltimosDosDigitos a < sumaUltimosDosDigitos b = 1
+             | sumaUltimosDosDigitos a > sumaUltimosDosDigitos b = -1
+             | sumaUltimosDosDigitos a == sumaUltimosDosDigitos b = 0
