@@ -79,7 +79,7 @@ digitoUnidades n1 =  mod n1 10
 
 --Ejercicio 2.j
 digitoDecenas :: Integer -> Integer
-digitoDecenas n1 =  mod n1 100
+digitoDecenas n1 =  div ((mod n1 100) - (mod n1 10)) 10
 
 --Ejercicio 3 -- TODO. Buscar si existe un k que haga la ecuacion = 0 siempre y cuando k no sea 0.
 estanRelacionados :: Integer -> Integer -> Bool
