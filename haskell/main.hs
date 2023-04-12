@@ -62,7 +62,8 @@ mismoIntervalo n1 n2  | n1<=3 && n2<=3 = True
 
 --Ejercicio 2.g (sin utilizar funciones para crear sets y prevenir repetidos)
 sumarDistintos :: Integer -> Integer -> Integer -> Integer 
-sumarDistintos n1 n2 n3 | n1 == n2 = n1 + n3 
+sumarDistintos n1 n2 n3 | n1 == n2 && n2 == n3 = n1
+                        | n1 == n2 = n1 + n3 
                         | n1 == n3 = n1 + n2 
                         | n2 == n3 = n2 + n1
                         | otherwise = n1 + n2 + n3
