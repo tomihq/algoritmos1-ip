@@ -36,3 +36,10 @@ esDivisible x y | (x < y) && (x > 0) = False
 sumaImpares :: Integer -> Integer
 sumaImpares n | n == 0 = 0
               | otherwise = 2*n-1 + sumaImpares(n-1)
+
+{- Ejercicio 5. Dado un entero calcula n!! = n(n-2)(n-4) -> n = 10 salida 3840 -}
+medioFac :: Integer -> Integer
+medioFac n | n == 0 = 1
+           | n < 0 = 0
+           | otherwise = n * medioFac(n-2)
+
