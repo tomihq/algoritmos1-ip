@@ -47,3 +47,20 @@ medioFac n | n == 0 = 1
 sumaDigitos :: Integer -> Integer
 sumaDigitos n | n < 10 = n
               | otherwise = mod n 10 + sumaDigitos(div n 10)
+
+-- Ejercicio 7. todosDigitosIguales, determina si todos los digitos de un número natural son iguales. 111 true 112 false
+
+todosDigitosIguales :: Integer -> Bool
+todosDigitosIguales n | n < 10 = True  
+                      | (decena n == unidad n) = todosDigitosIguales(digitoSinUnidad n)
+                      | otherwise = False
+
+decena :: Integer -> Integer
+decena n = unidad (digitoSinUnidad n)
+
+unidad :: Integer -> Integer
+unidad n = mod n 10
+
+digitoSinUnidad :: Integer -> Integer
+digitoSinUnidad n = div n 10
+
