@@ -43,3 +43,7 @@ medioFac n | n == 0 = 1
            | n < 0 = 0
            | otherwise = n * medioFac(n-2)
 
+-- Ejercicio 6. Sumar digitos de un número natural, utilizar mod y div.
+sumaDigitos :: Integer -> Integer
+sumaDigitos n | n < 10 = n
+              | otherwise = mod n 10 + sumaDigitos(div n 10)
