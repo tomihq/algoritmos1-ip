@@ -29,3 +29,10 @@ esDivisible :: Integer -> Integer -> Bool
 esDivisible x y | (x < y) && (x > 0) = False
                 | (x-y == 0) = True
                 | otherwise = esDivisible (x-y) y
+
+{- Ejercicio 4. Sumar los impares hasta n. Entrada 5 entonces -> 1 + 3 + 5 + 7 + 9 = 25
+-}
+
+sumaImpares :: Integer -> Integer
+sumaImpares n | n == 0 = 0
+              | otherwise = 2*n-1 + sumaImpares(n-1)
