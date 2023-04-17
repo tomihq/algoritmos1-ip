@@ -64,3 +64,17 @@ unidad n = mod n 10
 digitoSinUnidad :: Integer -> Integer
 digitoSinUnidad n = div n 10
 
+{- 
+Ejercicio 8 iesimoDigito - Recibe 2 enteros y retorna 1 entero que dado un n que pertenezca a los naturales y un i perteneciente a los naturales menor o igual a la cantidad de ditios de n, devuelve el iesimo digito de n.
+Por ejemplo: n: 2543 -> i: 3 -> 4
+-}
+
+iesimoDigito :: Integer -> Integer -> Integer
+iesimoDigito n i | i == cantDigitos n = unidad n 
+                 | otherwise = iesimoDigito (div n 10) i 
+
+cantDigitos :: Integer -> Integer
+cantDigitos n | n < 10 = 1 
+              | otherwise = 1 + cantDigitos (div n 10)
+
+
