@@ -112,3 +112,19 @@ f1 n | n == 0 = 1
 f2 :: Integer -> Float -> Float
 f2 n q | n == 0 = 1
        | otherwise = (q^n) + f2 (n-1) q
+
+{-
+    Ejercicio 10.c Sumatoria que comienza en i=1 y va hasta 2n, lo que hace es elevar q^i por cada iteración. n es natural mientras que q es real.
+    n = 2
+    q = 2
+    comenzaría en 2n = 4
+    2 ** 4 = 16
+    2 ** 3 = 8
+    2 ** 2 = 4
+    2 ** 1 = 2
+    2 ** 0 = 1
+-}
+
+f3 :: Integer -> Float -> Float
+f3 n q | n == 0 = 1
+       | otherwise = (q^(2*n)) + f3 (n-1) q
