@@ -1,3 +1,9 @@
+{-
+    Aclaraciones: 
+    No utilizar ni mod ni div a menos que se lo indique. 
+    Recordar que hay que llegar siempre al caso base. Empezamos desde el mas grande y vamos iterando al mas chico.
+    Si yo tengo una sumatoria que es maximo hasta n, yo empiezo desde n y voy restandole uno hasta llegar al indice mas pequeño
+-}
 {- Ejercicio 1: Secuencia de Fibonacci. Mando n = 3 -> fib(3-1) + fib(3-2) -> fib(2) + fib(1)-> fib(2-1) + 1 => 1 + 1 = 2 -}
 
 fib :: Integer -> Integer
@@ -77,4 +83,32 @@ cantDigitos :: Integer -> Integer
 cantDigitos n | n < 10 = 1 
               | otherwise = 1 + cantDigitos (div n 10)
 
+{-
+    Ejercicio 10. a. Sumatoria que comienza en i = 0 y va hasta n y lo que hace es elevar 2^i por cada iteracion. El parametro n es natural.
+    n = 2 -> Itera max 2 veces
+    i = 2 = 2 ** 2 = 4
+    i = 1 = 2 ** 1 = 2
+    i = 0 = 2 ** 0 = 1
+    TOTAL = 2 + 1 + 0 = 7
+-}
 
+f1 :: Integer -> Integer
+f1 n | n == 0 = 1
+     | otherwise = (2^n) + f1 (n-1)
+
+{-
+    Ejercicio 10. b. Sumatoria que comienza en i = 1 y va hasta n y lo que hace es elevar q^i por cada iteración.
+    n es natural mientras que q es real.
+    q = 4
+    n = 2
+
+    4**2 + 4**1 + 4 ** 0 = 16 + 4 + 1 = 21
+
+    q = 4.5
+    n = 2
+    4.5 ** 2 + 4.5 ** 1 + 4.5 ** 0 = 81/4 + 4.5 + 1 
+-}
+
+f2 :: Integer -> Float -> Float
+f2 n q | n == 0 = 1
+       | otherwise = (q^n) + f2 (n-1) q
