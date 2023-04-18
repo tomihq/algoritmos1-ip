@@ -128,3 +128,32 @@ f2 n q | n == 0 = 1
 f3 :: Integer -> Float -> Float
 f3 n q | n == 0 = 1
        | otherwise = (q^(2*n)) + f3 (n-1) q
+
+{-
+    Ejercicio 10.d. Sumatoria que comienza en i = n y va hasta 2n, lo que hace es elevar q ^i por cada iteración. n es natural mientras que q es real.
+    n = 2
+    q = 2
+    
+    2^2 = 4
+    2^3 = 8
+    2^4 = 16
+-}
+
+{-
+    Ejercicio 11.a eAprox que recibe un Integer y retorna un Float que aproxima el valor del numero e a partir de la sumatoria: Comienza en i = 0 y va hasta n y va dividiendo 1 / i!.
+    De por sí sería ilógico si n fuese negativo por lo tanto siempre será n>=0
+    n = 2 va hasta 0.
+    factorial 2 = 2 * 1 = 2
+    factorial 1 = 1 * 1 = 1
+    factorial 0 = 1
+    entonces...
+    1/2 + 1/1 + 1/1 = 5/2
+-}
+
+factorial :: Integer -> Integer
+factorial n | n == 0 = 1
+            | otherwise = n * factorial(n-1)
+
+eAprox :: Integer -> Float
+eAprox n | n == 0 = 1.0
+         | otherwise = 1.0 / fromIntegral (factorial n) + eAprox (n-1)
