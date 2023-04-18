@@ -157,3 +157,19 @@ factorial n | n == 0 = 1
 eAprox :: Integer -> Float
 eAprox n | n == 0 = 1.0
          | otherwise = 1.0 / fromIntegral (factorial n) + eAprox (n-1)
+
+-- Ejercicio 11.b TODO
+
+-- Ejercicio 12 TODO
+
+{-Ejercicio 13 Recursividad doble. Sumatoria que va hasta n y sale desde i=1 y Sumatoria que va hasta m y sale desde j = 1 y dentro se calcula i ** j. Se calcula de adentro hacia afuera.
+Se agarra un i, y se hace recursividad m veces, cambia i y luego se hace recursividad m veces, i cambiará mediante recursividad hasta que i llegue a 0 (caso min 1 pq 1-1 = 0)
+-}
+
+sumatoriaUno :: Integer -> Integer -> Integer
+sumatoriaUno _ 0 = 0
+sumatoriaUno n j = (n^j) + sumatoriaUno n (j-1)
+
+sumatoriaDoble :: Integer -> Integer -> Integer
+sumatoriaDoble 0 _ = 0
+sumatoriaDoble n m = sumatoriaDoble (n-1) m + sumatoriaUno n m
