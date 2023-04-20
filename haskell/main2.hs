@@ -183,6 +183,7 @@ b es menor o igual a m (entrada).
 
 Para empezar... q: 2, n = 2, m = 2
 2^(2+2) + 2^(2+1) + 2^(1+2) + 2^(1+1) = 2^4 + 2^3 + 2^3 + 2^2 = 36
+Nótese que n queda fijo hasta que m llega a 1, una vez que m llega a uno, n se disminuye en 1 hasta llegar a 1.
 -}
 
 --Esta funcion lo que hace es simplementar llamar a la sumaInternaM y cuando termina de hacer todo su trabajo, el n se disminuye en 1.
