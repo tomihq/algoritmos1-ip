@@ -159,7 +159,9 @@ eAprox :: Integer -> Float
 eAprox n | n == 0 = 1.0
          | otherwise = 1.0 / fromIntegral (factorial n) + eAprox (n-1)
 
--- Ejercicio 11.b TODO
+-- Ejercicio 11.b 
+e :: Float
+e = eAprox 10
 
 -- Ejercicio 12 TODO
 
@@ -174,3 +176,36 @@ sumatoriaUno n j = (n^j) + sumatoriaUno n (j-1)
 sumatoriaDoble :: Integer -> Integer -> Integer
 sumatoriaDoble 0 _ = 0
 sumatoriaDoble n m = sumatoriaDoble (n-1) m + sumatoriaUno n m
+
+{- Ejercicio 14: sumaPotencias :: Integer -> Integer -> Integer -> Integer. Dados tres naturales q, n y m, sume todas las potencias de la forma q**(a+b) con 1<=a<=n y 1<=b<=m
+q entrada
+a es menor o igual a n (entrada).
+b es menor o igual a m (entrada).
+
+Para empezar... q: 2, n = 2, m = 2
+2^(2+2) + 2^(2+1) + 2^(1+2) + 2^(1+1) = 2^4 + 2^3 + 2^3 + 2^2 = 36
+-}
+
+--Esta funcion lo que hace es simplementar llamar a la sumaInternaM y cuando termina de hacer todo su trabajo, el n se disminuye en 1.
+sumaPotencias :: Integer -> Integer -> Integer -> Integer
+sumaPotencias q n m  | n == 0 = 0
+                     | otherwise = sumaInternaM q n m + sumaPotencias q (n-1) m
+
+
+--En base a un n y m, va a sumar n + cada uno de los m. 
+--Esta funcion lo que hace es ir restando el m hasta que sea 0. 
+sumaInternaM :: Integer -> Integer -> Integer -> Integer
+sumaInternaM q n m | m == 0 = 0
+                   | otherwise = q^(n+m) + sumaInternaM q n (m-1)
+
+
+{- Ejercicio 15. TODO
+-}
+
+{-Ejercicio 16.a: Implementar menorDivisor :: Integer ->Integer que calcule el menor divisor (mayor que 1) de un natural n pasado como parámetro. 
+Ej: n = 10 - ¿Tiene divisores? Sí, 1, 2, 5 y sí mismo. El 1 no es válido. Retorno: 2
+Ej: n = 2 - ¿Tiene divisores? Sí, 1 y sí mismo. El 1 no es válido. Retorno: 2
+Ej: n = 30 - ¿Tiene divisores? Sí, 1, 2, 3, 5, 6, 10, 15 y 30. El 1 no es válido. Retorno: 2
+Ej: n = 1 - Menor divisor - Sí mismo, no tiene otro.
+Ej: n = 23 - Es primo - 1 y sí mismo. Retorno: 23
+-}
