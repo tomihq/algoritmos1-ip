@@ -199,8 +199,24 @@ sumaInternaM q n m | m == 0 = 0
                    | otherwise = q^(n+m) + sumaInternaM q n (m-1)
 
 
-{- Ejercicio 15. TODO
+{- 
+    Ejercicio 15. Implementar una funcion sumaRacionales :: Integer ->Integer ->Float que dados dos naturales n, m
+    sume todos los numeros racionales de la forma p/q con 1 ≤ p ≤ n y 1 ≤ q ≤ m 
+    n = 2, m = 2
+    2/2 + 2/1 + 1/2 + 1/1 = 1 + 2 + 1/2 + 1 = 4.5
 -}
+
+sumaRacionales :: Int -> Int  -> Float
+sumaRacionales n m   | n == 0 = 0
+                     | otherwise = sumaRacionalesM n m + sumaRacionales (n-1) m
+
+
+--En base a un n y m, va a sumar n + cada uno de los m. 
+--Esta funcion lo que hace es ir restando el m hasta que sea 0. 
+sumaRacionalesM :: Int  -> Int -> Float
+sumaRacionalesM n m  | m == 0 = 0
+                     | otherwise = fromIntegral(n) / fromIntegral(m) + sumaRacionalesM n (m-1)
+
 
 {-Ejercicio 16.a: Implementar menorDivisor :: Integer ->Integer que calcule el menor divisor (mayor que 1) de un natural n pasado como parámetro. 
 Ej: n = 10 - ¿Tiene divisores? Sí, 1, 2, 5 y sí mismo. El 1 no es válido. Retorno: 2
