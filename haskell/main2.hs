@@ -83,6 +83,21 @@ cantDigitos :: Integer -> Integer
 cantDigitos n | n < 10 = 1 
               | otherwise = 1 + cantDigitos (div n 10)
 
+{-Ejercicio 9. Determinar si un numero mayor natural es capicua. Un numero es capicua si se lee igual de izquierda a derecha que de derecha a izquierda.
+Mi logica es la siguiente: Invertir el numero original completamente, y comparar el original con el invertido, si son iguales entonces es capicua.
+
+1) Extraigo el ultimo digito del numero original y lo coloco como el primero en el reversedNumber, vuelvo a llamar a la funcion y una vez que no tenga más numeros por agregar a la lista invertida puedo comparar original con el reverso.
+2) Una vez extraidos todos los digitos, significa que n es 0 por lo que puedo comparar el numero original con el invertido.
+-}
+
+esCapicua :: Int -> Bool
+esCapicua n = esCapicua' n 0 n
+  where
+    esCapicua' n reversedNumber originalNumber
+      | n == 0 = originalNumber == reversedNumber
+      | otherwise = esCapicua' (div n 10) (reversedNumber * 10 + mod n 10) originalNumber
+
+
 {-
     Ejercicio 10. a. Sumatoria que comienza en i = 0 y va hasta n y lo que hace es elevar 2^i por cada iteracion. El parametro n es natural.
     n = 2 -> Itera max 2 veces
@@ -225,4 +240,16 @@ Ej: n = 2 - ¿Tiene divisores? Sí, 1 y sí mismo. El 1 no es válido. Retorno: 
 Ej: n = 30 - ¿Tiene divisores? Sí, 1, 2, 3, 5, 6, 10, 15 y 30. El 1 no es válido. Retorno: 2
 Ej: n = 1 - Menor divisor - Sí mismo, no tiene otro.
 Ej: n = 23 - Es primo - 1 y sí mismo. Retorno: 23
+-}
+
+{-
+    Ejercicio 17: Implementar la funcion esFibonacci tal que recibe un entero y retorna un booleano.
+    Resultado será true SÍ Y SOLO SÍ EXISTE UN i que pertenece a los ENTEROS; i>=0 y n = fib(i)
+
+    ¿Qué debería de hacer esto?
+-}
+
+{-
+    Ejercicio 18. Implemente mayorDigitoPar :: Integer -> Integer tal que resultado es el mayor digito par de n. En caso de no tener digitos pares, retornar -1.
+
 -}
