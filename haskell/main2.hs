@@ -213,6 +213,7 @@ sumaRacionales n m   | n == 0 = 0
 
 --En base a un n y m, va a sumar n + cada uno de los m. 
 --Esta funcion lo que hace es ir restando el m hasta que sea 0. 
+--NOTACIÓN: Cuando se aplica fromIntegral a un valor entero, se convierte implícitamente a un tipo que es compatible con el tipo de destino deseado.
 sumaRacionalesM :: Int  -> Int -> Float
 sumaRacionalesM n m  | m == 0 = 0
                      | otherwise = fromIntegral(n) / fromIntegral(m) + sumaRacionalesM n (m-1)
