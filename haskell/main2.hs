@@ -242,6 +242,25 @@ Ej: n = 1 - Menor divisor - Sí mismo, no tiene otro.
 Ej: n = 23 - Es primo - 1 y sí mismo. Retorno: 23
 -}
 
+menorDivisor :: Integer -> Integer
+menorDivisor n | mod n 2 == 0 = 2
+               | mod n 2 /= 0 = menorPrimoDivisor n (n-1)
+               
+menorPrimoDivisor :: Integer -> Integer -> Integer
+menorPrimoDivisor x y | (y<2) = x
+                      | (mod x y == 0) =  guardarPunto y y
+                      | otherwise = menorPrimoDivisor x (y-1)
+
+guardarPunto :: Integer -> Integer -> Integer
+guardarPunto x y | y > 1 = menorPrimoDivisor x (y-1)
+
+{-
+    Ejercicio 16.b. esPrimo
+-}
+esPrimo :: Integer -> Bool
+esPrimo n | menorPrimoDivisor n (n-1) == n = True
+          | otherwise = False
+
 {-
     Ejercicio 17: Implementar la funcion esFibonacci tal que recibe un entero y retorna un booleano.
     Resultado será true SÍ Y SOLO SÍ EXISTE UN i que pertenece a los ENTEROS; i>=0 y n = fib(i)
