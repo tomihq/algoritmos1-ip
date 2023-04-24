@@ -245,7 +245,7 @@ Ej: n = 23 - Es primo - 1 y sí mismo. Retorno: 23
 menorDivisor :: Integer -> Integer
 menorDivisor n | mod n 2 == 0 = 2
                | mod n 2 /= 0 = menorPrimoDivisor n (n-1)
-               
+
 menorPrimoDivisor :: Integer -> Integer -> Integer
 menorPrimoDivisor x y | (y<2) = x
                       | (mod x y == 0) =  guardarPunto y y
@@ -260,6 +260,24 @@ guardarPunto x y | y > 1 = menorPrimoDivisor x (y-1)
 esPrimo :: Integer -> Bool
 esPrimo n | menorPrimoDivisor n (n-1) == n = True
           | otherwise = False
+
+{-
+    Ejercicio 16.c sonCoprimos: Dados dos numeros naturales indica SI NO TIENEN algun divisor EN COMÚN MAYOR estricto que 1.
+    n = 6 y q = 19 -> True. No tienen divisor en común.
+    n = 6 y q = 27 -> False. Ambos son divisibles por 3.
+    n = 12 y q = 41 -> True.
+
+    Utilizamos algoritmo euclides.
+-}
+
+sonCoprimos :: Integer -> Integer -> Bool
+sonCoprimos n q | mcd n q <= 1 = True
+                | otherwise = False
+
+mcd :: Integer -> Integer -> Integer
+mcd a b | abs b > abs a = mcd b a
+mcd a 0 = abs a
+mcd a b = mcd b (mod a b)
 
 {-
     Ejercicio 17: Implementar la funcion esFibonacci tal que recibe un entero y retorna un booleano.
