@@ -3,3 +3,8 @@
 longitud :: [t] -> Integer 
 longitud [] = 0
 longitud (_:xs) = 1 + longitud xs
+
+{-Ejercicio 2, dada una secuencia con más de un elemento, obtener el último elemento de la lista. Voy utilizando recursividad hasta quedarme con la cola que tiene un elemento.-}
+ultimo :: [t] -> [t] 
+ultimo lista | longitud lista == 1 = lista
+             | otherwise = ultimo(tail(lista))
