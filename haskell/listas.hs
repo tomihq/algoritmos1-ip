@@ -47,5 +47,19 @@ subseq lista indiceDesde indiceHasta | indiceDesde < 0 || indiceHasta < 0 = []
                                      | indiceDesde == 0 = head(lista) : subseq (tail(lista)) 0 (indiceHasta-1)
                                      | otherwise = subseq (tail(lista)) (indiceDesde-1) (indiceHasta-1) 
 
+{-Creo una función auxiliar que reciba como parámetro la lista original, la listaInvertida (vacia inicialmente). Si la lista original es vacia significa que listaInvertida ya tiene todos los valores de la lista original invertidos, caso contrario, llamo a reversoAux nuevamente pero coloco la cabeza d -}
+reverso :: [t] -> [t]
+reverso lista = reversoAux lista [] 
+
+{-
+    Proceso: Recibe una lista a invertir [1, 2] y una lista vacia por defecto.
+    Quita la cabeza de la lista [1] y la agrega como elemento a la listaInvertida vacia [1]. Ahora ambas listas quedaron [2] y [1].
+    Repite el proceso, y ahora de la lista original quita el elemento [2] y lo agrega al principio de la lista invertida [1] -> [2, 1].
+    ¡Listo! Hay que recordar que aquí siempre tenemos que ir colocando los elementos adelante a medida que vamos iterando utilizando ":" que tiene como firma a -> [a] -> [a] el cual nos indica que a partir de un elemento, se lo enviamos a una lista y nos retorna una lista con el elemento de tipo a dentro de la lista de tipo [a].
+-}
+reversoAux :: [t] -> [t] -> [t]
+reversoAux [] listaInvertida = listaInvertida
+reversoAux (x:xs) listaInvertida = reversoAux xs (x:listaInvertida)
+
 
 
