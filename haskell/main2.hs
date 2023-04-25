@@ -45,8 +45,8 @@ sumaImpares n | n == 0 = 0
 
 {- Ejercicio 5. Dado un entero calcula n!! = n(n-2)(n-4) -> n = 10 salida 3840 -}
 medioFac :: Integer -> Integer
-medioFac n | n == 0 = 1
-           | n < 0 = 0
+medioFac n | n < 0 = 0
+           | n == 0 || n == 1 = 1
            | otherwise = n * medioFac(n-2)
 
 -- Ejercicio 6. Sumar digitos de un número natural, utilizar mod y div.
@@ -82,6 +82,21 @@ iesimoDigito n i | i == cantDigitos n = unidad n
 cantDigitos :: Integer -> Integer
 cantDigitos n | n < 10 = 1 
               | otherwise = 1 + cantDigitos (div n 10)
+
+{-Ejercicio 9. Determinar si un numero mayor natural es capicua. Un numero es capicua si se lee igual de izquierda a derecha que de derecha a izquierda.
+Mi logica es la siguiente: Invertir el numero original completamente, y comparar el original con el invertido, si son iguales entonces es capicua.
+
+1) Extraigo el ultimo digito del numero original y lo coloco como el primero en el reversedNumber, vuelvo a llamar a la funcion y una vez que no tenga más numeros por agregar a la lista invertida puedo comparar original con el reverso.
+2) Una vez extraidos todos los digitos, significa que n es 0 por lo que puedo comparar el numero original con el invertido.
+-}
+
+esCapicua :: Int -> Bool
+esCapicua n = esCapicua' n 0 n
+  where
+    esCapicua' n reversedNumber originalNumber
+      | n == 0 = originalNumber == reversedNumber
+      | otherwise = esCapicua' (div n 10) (reversedNumber * 10 + mod n 10) originalNumber
+
 
 {-
     Ejercicio 10. a. Sumatoria que comienza en i = 0 y va hasta n y lo que hace es elevar 2^i por cada iteracion. El parametro n es natural.
@@ -158,7 +173,9 @@ eAprox :: Integer -> Float
 eAprox n | n == 0 = 1.0
          | otherwise = 1.0 / fromIntegral (factorial n) + eAprox (n-1)
 
--- Ejercicio 11.b TODO
+-- Ejercicio 11.b 
+e :: Float
+e = eAprox 10
 
 -- Ejercicio 12 TODO
 
@@ -173,3 +190,103 @@ sumatoriaUno n j = (n^j) + sumatoriaUno n (j-1)
 sumatoriaDoble :: Integer -> Integer -> Integer
 sumatoriaDoble 0 _ = 0
 sumatoriaDoble n m = sumatoriaDoble (n-1) m + sumatoriaUno n m
+
+{- Ejercicio 14: sumaPotencias :: Integer -> Integer -> Integer -> Integer. Dados tres naturales q, n y m, sume todas las potencias de la forma q**(a+b) con 1<=a<=n y 1<=b<=m
+q entrada
+a es menor o igual a n (entrada).
+b es menor o igual a m (entrada).
+
+Para empezar... q: 2, n = 2, m = 2
+2^(2+2) + 2^(2+1) + 2^(1+2) + 2^(1+1) = 2^4 + 2^3 + 2^3 + 2^2 = 36
+Nótese que n queda fijo hasta que m llega a 1, una vez que m llega a uno, n se disminuye en 1 hasta llegar a 1.
+-}
+
+--Esta funcion lo que hace es simplementar llamar a la sumaInternaM y cuando termina de hacer todo su trabajo, el n se disminuye en 1.
+sumaPotencias :: Integer -> Integer -> Integer -> Integer
+sumaPotencias q n m  | n == 0 = 0
+                     | otherwise = sumaInternaM q n m + sumaPotencias q (n-1) m
+
+
+--En base a un n y m, va a sumar n + cada uno de los m. 
+--Esta funcion lo que hace es ir restando el m hasta que sea 0. 
+sumaInternaM :: Integer -> Integer -> Integer -> Integer
+sumaInternaM q n m | m == 0 = 0
+                   | otherwise = q^(n+m) + sumaInternaM q n (m-1)
+
+
+{- 
+    Ejercicio 15. Implementar una funcion sumaRacionales :: Integer ->Integer ->Float que dados dos naturales n, m
+    sume todos los numeros racionales de la forma p/q con 1 ≤ p ≤ n y 1 ≤ q ≤ m 
+    n = 2, m = 2
+    2/2 + 2/1 + 1/2 + 1/1 = 1 + 2 + 1/2 + 1 = 4.5
+-}
+
+sumaRacionales :: Int -> Int  -> Float
+sumaRacionales n m   | n == 0 = 0
+                     | otherwise = sumaRacionalesM n m + sumaRacionales (n-1) m
+
+
+--En base a un n y m, va a sumar n + cada uno de los m. 
+--Esta funcion lo que hace es ir restando el m hasta que sea 0. 
+--NOTACIÓN: Cuando se aplica fromIntegral a un valor entero, se convierte implícitamente a un tipo que es compatible con el tipo de destino deseado.
+sumaRacionalesM :: Int  -> Int -> Float
+sumaRacionalesM n m  | m == 0 = 0
+                     | otherwise = fromIntegral(n) / fromIntegral(m) + sumaRacionalesM n (m-1)
+
+
+{-Ejercicio 16.a: Implementar menorDivisor :: Integer ->Integer que calcule el menor divisor (mayor que 1) de un natural n pasado como parámetro. 
+Ej: n = 10 - ¿Tiene divisores? Sí, 1, 2, 5 y sí mismo. El 1 no es válido. Retorno: 2
+Ej: n = 2 - ¿Tiene divisores? Sí, 1 y sí mismo. El 1 no es válido. Retorno: 2
+Ej: n = 30 - ¿Tiene divisores? Sí, 1, 2, 3, 5, 6, 10, 15 y 30. El 1 no es válido. Retorno: 2
+Ej: n = 1 - Menor divisor - Sí mismo, no tiene otro.
+Ej: n = 23 - Es primo - 1 y sí mismo. Retorno: 23
+-}
+
+menorDivisor :: Integer -> Integer
+menorDivisor n | mod n 2 == 0 = 2
+               | mod n 2 /= 0 = menorPrimoDivisor n (n-1)
+
+menorPrimoDivisor :: Integer -> Integer -> Integer
+menorPrimoDivisor x y | (y<2) = x
+                      | (mod x y == 0) =  guardarPunto y y
+                      | otherwise = menorPrimoDivisor x (y-1)
+
+guardarPunto :: Integer -> Integer -> Integer
+guardarPunto x y | y > 1 = menorPrimoDivisor x (y-1)
+
+{-
+    Ejercicio 16.b. esPrimo
+-}
+esPrimo :: Integer -> Bool
+esPrimo n | menorPrimoDivisor n (n-1) == n = True
+          | otherwise = False
+
+{-
+    Ejercicio 16.c sonCoprimos: Dados dos numeros naturales indica SI NO TIENEN algun divisor EN COMÚN MAYOR estricto que 1.
+    n = 6 y q = 19 -> True. No tienen divisor en común.
+    n = 6 y q = 27 -> False. Ambos son divisibles por 3.
+    n = 12 y q = 41 -> True.
+
+    Utilizamos algoritmo euclides.
+-}
+
+sonCoprimos :: Integer -> Integer -> Bool
+sonCoprimos n q | mcd n q <= 1 = True
+                | otherwise = False
+
+mcd :: Integer -> Integer -> Integer
+mcd a b | abs b > abs a = mcd b a
+mcd a 0 = abs a
+mcd a b = mcd b (mod a b)
+
+{-
+    Ejercicio 17: Implementar la funcion esFibonacci tal que recibe un entero y retorna un booleano.
+    Resultado será true SÍ Y SOLO SÍ EXISTE UN i que pertenece a los ENTEROS; i>=0 y n = fib(i)
+
+    ¿Qué debería de hacer esto?
+-}
+
+{-
+    Ejercicio 18. Implemente mayorDigitoPar :: Integer -> Integer tal que resultado es el mayor digito par de n. En caso de no tener digitos pares, retornar -1.
+
+-}
