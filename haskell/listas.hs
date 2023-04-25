@@ -1,15 +1,15 @@
 {-RECURSIÓN + LISTAS.-}
-{-Ejercicio 1. Indicar la longitud de una lista. "Desestructuro" la cabeza por cada iteracion y voy sumando 1 y hago recursion en base a cola de la lista.-}
+{-Ejercicio 1. 1. Indicar la longitud de una lista. "Desestructuro" la cabeza por cada iteracion y voy sumando 1 y hago recursion en base a cola de la lista.-}
 longitud :: [t] -> Integer 
 longitud [] = 0
 longitud (_:xs) = 1 + longitud xs
 
-{-Ejercicio 2, dada una secuencia con más de un elemento, obtener el último elemento de la lista. Voy utilizando recursividad hasta quedarme con la cola que tiene un elemento.-}
+{-Ejercicio 1. 2, dada una secuencia con más de un elemento, obtener el último elemento de la lista. Voy utilizando recursividad hasta quedarme con la cola que tiene un elemento.-}
 ultimo :: [t] -> [t] 
 ultimo lista | longitud lista == 1 = lista
              | otherwise = ultimo(tail(lista))
 
-{- Ejercicio 3, dada una secuencia, retornar una nueva secuencia de tipo t que vaya desde el indice 0 hasta el anterior a la longitud de la lista. Básicamente devuelvo una copia de la lista-}
+{- Ejercicio 1. 3, dada una secuencia, retornar una nueva secuencia de tipo t que vaya desde el indice 0 hasta el anterior a la longitud de la lista. Básicamente devuelvo una copia de la lista-}
 
 principio :: [t] -> [t]
 principio lista = subseq (lista) 0 (longitud lista - 1)
@@ -47,7 +47,7 @@ subseq lista indiceDesde indiceHasta | indiceDesde < 0 || indiceHasta < 0 = []
                                      | indiceDesde == 0 = head(lista) : subseq (tail(lista)) 0 (indiceHasta-1)
                                      | otherwise = subseq (tail(lista)) (indiceDesde-1) (indiceHasta-1) 
 
-{-Creo una función auxiliar que reciba como parámetro la lista original, la listaInvertida (vacia inicialmente). Si la lista original es vacia significa que listaInvertida ya tiene todos los valores de la lista original invertidos, caso contrario, llamo a reversoAux nuevamente pero coloco la cabeza d -}
+{-Ejercicio 1. 4. Creo una función auxiliar que reciba como parámetro la lista original, la listaInvertida (vacia inicialmente). Si la lista original es vacia significa que listaInvertida ya tiene todos los valores de la lista original invertidos, caso contrario, llamo a reversoAux nuevamente pero coloco la cabeza d -}
 reverso :: [t] -> [t]
 reverso lista = reversoAux lista [] 
 
