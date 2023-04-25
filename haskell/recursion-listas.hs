@@ -62,7 +62,7 @@ reversoAux [] listaInvertida = listaInvertida
 reversoAux (x:xs) listaInvertida = reversoAux xs (x:listaInvertida)
 
 {-Ejercicio 2. 1. Pertenece: Debo verificar si un valor pertenece a una secuencia ¿Voy validando si el elemento es igual a la cabeza de la lista, y si no pasa, entonces llamo nuevamente a recursion pero con la cola de la lista? 
-Véase que por primera vez utilizamos Eq t: Es una restricción de tipo que significa que el tipo t debe ser una instancia de la clase de tipos Eq lo cual significa que los valores de tipo t deben ser comparables por la igualdad con el operador "==" Por lo tanto podemos utilizar este operador.
+Véase que por primera vez utilizamos  Eq t: Es una restricción de tipo que significa que el tipo t debe ser una instancia de la clase de tipos Eq lo cual significa que los valores de tipo t deben ser comparables por la igualdad con el operador "==" Por lo tanto podemos utilizar este operador.
 -}
 pertenece :: (Eq t) => t -> [t] -> Bool 
 pertenece valorABuscar lista | longitud(lista) == 0 = False
