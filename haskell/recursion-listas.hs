@@ -83,4 +83,15 @@ todosIguales :: (Eq t) => [t] -> Bool
 todosIguales lista | longitud(lista) <= 1 = True
                    | longitud(lista) /= 0 && head(lista) == ultimo(tail(lista)) = todosIguales (tail(lista))
                    | otherwise = False
-
+{-
+    Ejercicio 2.3. EXISTE un i j que pertenece a los enteros tal que i y j estan 0 y la longitud de la lista - 1.
+    i != j pero el elemento en la lista en ambos indices son distintos.
+    Por ejemplo: lista = [1, 2, 2]
+    i = 1 (cabeza)
+    j = 2 (ultimo de la cola)
+    lista[i] == lista[j] -> 2 = 2 por lo tanto, al ser el mismo elemento en i y j, no son todosDistintos.
+-}
+todosDistintos :: (Eq t) => [t] -> Bool
+todosDistintos lista | longitud(lista) == 1 = False
+                     | longitud(lista) /= 0 && head(lista) == ultimo(tail(lista)) = False
+                     | otherwise = True
