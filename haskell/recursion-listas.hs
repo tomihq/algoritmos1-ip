@@ -85,7 +85,7 @@ todosIguales lista | longitud(lista) <= 1 = True
                    | otherwise = False
 {-
     Ejercicio 2.3. EXISTE un i j que pertenece a los enteros tal que i y j estan 0 y la longitud de la lista - 1.
-    i != j pero el elemento en la lista en ambos indices son distintos.
+    i != j pero el elemento en la lista en ambos indices son iguales.
     Por ejemplo: lista = [1, 2, 2]
     i = 1 (cabeza)
     j = 2 (ultimo de la cola)
