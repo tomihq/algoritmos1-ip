@@ -5,8 +5,8 @@ longitud [] = 0
 longitud (_:xs) = 1 + longitud xs
 
 {-Ejercicio 1. 2, dada una secuencia con más de un elemento, obtener el último elemento de la lista. Voy utilizando recursividad hasta quedarme con la cola que tiene un elemento.-}
-ultimo :: [t] -> [t] 
-ultimo lista | longitud lista == 1 = lista
+ultimo :: [t] -> t 
+ultimo lista | longitud lista == 1 = head(lista)
              | otherwise = ultimo(tail(lista))
 
 {- Ejercicio 1. 3, dada una secuencia, retornar una nueva secuencia de tipo t que vaya desde el indice 0 hasta el anterior a la longitud de la lista. Básicamente devuelvo una copia de la lista-}
@@ -67,4 +67,20 @@ Véase que por primera vez utilizamos  Eq t: Es una restricción de tipo que sig
 pertenece :: (Eq t) => t -> [t] -> Bool 
 pertenece valorABuscar lista | longitud(lista) == 0 = False
                              | head(lista) == valorABuscar = True 
-                             | otherwise = pertenece valorABuscar (tail lista)
+                             | otherwise = pertenece valorABuscar (tail lista) 
+
+{-Ejercicio 2.2. Todos iguales: Que dada una lista devuelve verdadero sí y solamente sí todos sus elementos son iguales.
+Una opción sería crear un Set (conjunto) pero hasta ahora no se "permitió" crear nuevos tipos.
+Ej: [1, 3, 2, 4] -> como 1 es distinto a 3, entonces false.
+Ej: [1, 1, 3, 1] -> como 1 es igual a 1, sigue, como 1 es distinto a 3 entonces retorno false. Tengo que iterar hasta el ultimo elemento de la lista, si la longitud de la lista original es 0 entonces retorno true.
+Proceso:
+Paso 1: Comparo el head = 1 con el ultimo de la cola de la lista 1. 1 = 1 entonces sigo
+Paso 2: Comparo el head = 1 con el ultimo de la cola de la lista 1. 1 = 1 entonces sigo.
+Paso 3: Comparo el head = 3 con el ultimo de la cola de la lista 1. 3 /= 1 entonces es False.
+-}
+
+todosIguales :: (Eq t) => [t] -> Bool
+todosIguales lista | longitud(lista) <= 1 = True
+                   | longitud(lista) /= 0 && head(lista) == ultimo(tail(lista)) = todosIguales (tail(lista))
+                   | otherwise = False
+
