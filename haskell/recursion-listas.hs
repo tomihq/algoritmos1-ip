@@ -93,5 +93,15 @@ todosIguales lista | longitud(lista) <= 1 = True
 -}
 todosDistintos :: (Eq t) => [t] -> Bool
 todosDistintos lista | longitud(lista) == 1 = False
-                     | longitud(lista) /= 0 && head(lista) == ultimo(tail(lista)) = False
-                     | otherwise = True
+                     | longitud(lista) /= 0 && head(lista) /= ultimo(tail(lista)) = True
+                     | otherwise = todosDistintos(tail(lista))
+
+{-
+    Ejercicio 2.4 hayRepetidos: Existe un i,j que pertenece a los enteros tal que i y j están entre 0 y la longitud de la lista -1.
+    Si i != j pero en la lista tienen el mismo elemento entonces hayRepetidos.
+-}
+
+hayRepetidos :: (Eq t) => [t] -> Bool
+hayRepetidos lista   | longitud(lista) == 1 = False
+                     | longitud(lista) /= 0 && head(lista) == ultimo(tail(lista)) = True
+                     | otherwise = hayRepetidos(tail(lista))
