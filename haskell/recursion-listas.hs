@@ -175,6 +175,16 @@ sumarElPrimero lista = sumarElPrimeroAux lista (head(lista) )
 sumarElPrimeroAux :: [Integer] -> Integer -> [Integer]
 sumarElPrimeroAux [] _  = []
 sumarElPrimeroAux (x:xs) primerElemento =  (x+primerElemento) : sumarElPrimeroAux xs primerElemento
+
+{-
+    Ejercicio 3.6 sumarElUltimo: Lo mismo que el de arriba pero con el ultimo. Reutilizo la funcion ultimo que hice hace un tiempo
+-}
+sumarElUltimo :: [Integer] -> [Integer]
+sumarElUltimo lista = sumarElUltimoAux lista (ultimo lista)
+
+sumarElUltimoAux :: [Integer] -> Integer -> [Integer]
+sumarElUltimoAux [] _  = []
+sumarElUltimoAux (x:xs) ultimoElemento =  (x+ultimoElemento) : sumarElUltimoAux xs ultimoElemento
                                      
 {-
     Ejercicio 3.7. pares: De una lista quitar los impares.
