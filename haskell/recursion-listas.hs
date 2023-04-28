@@ -205,3 +205,56 @@ multiplosDeN :: Integer -> [Integer] -> [Integer]
 multiplosDeN n (x:xs) | longitud(xs) == 0 = xs
                       | mod x n == 0 = x : multiplosDeN n xs
                       | otherwise = multiplosDeN n xs
+
+{-
+Ejercicio 4.1: sacarBlancosRepetidos: Reemplaza cada subsecuencia de blancos contiguos de la primera lista por un solo blanco en la segunda lista.
+Ej: "Hola                 Mundo" - Se le quitan todos los espacios demás y deja uno solo Hola Mundo
+Ej 2:"                    a" - como hay muchos espacios en blanco y la letra no está instantaneamente, hago recursion hasta encontrar una.
+Ej 3: "hola      como     estan    " retornaria "hola como estan"   - quito los espacios en blanco entre las palabras y sanitizo el final tambien.    
+-}
+
+sacarBlancosRepetidos :: [Char] -> [Char]
+sacarBlancosRepetidos [] = []
+sacarBlancosRepetidos (x:xs)
+    | x == ' ' = sacarBlancosRepetidos xs --si la cabeza de la lista es vacía, sigo haciendo recursividad hasta encontrar primer caracter (ej. 2)
+    | otherwise = sacarBlancosRepetidos' (x:xs)
+  where
+    sacarBlancosRepetidos' [] = []
+    sacarBlancosRepetidos' [x] = if x == ' ' then [] else [x] --si la lista tiene un solo caracter y es vacio, devuelve nada, caso contrario el valor.
+    sacarBlancosRepetidos' (x:xs) | x == ' ' && head xs == ' ' = sacarBlancosRepetidos' xs --si sucede algo como hola  como elimina un espacio                                                                                 en blanco.
+                                  | otherwise = x : sacarBlancosRepetidos' xs
+
+{-
+Ejercicio 4.2: contarPalabras -> Recibo un palabra, mando a sacarBlancosRepetidos y la cantidad de espacios que hay, es la cantidad de palabras que hay.
+Esta    es   una prueba  -> Esta es una prueba -> 3 espacios = 4 palabras.
+nada = 0 palabras
+h = 1 palabra
+-}
+
+contarPalabras :: [Char] -> Integer
+contarPalabras [] = 0
+contarPalabras lista  | tail(lista) ==  [] = 1
+contarPalabras lista  | head(sacarBlancosRepetidos lista) == ' ' = 1 + contarPalabras(sacarBlancosRepetidos (tail(lista)))
+contarPalabras lista  | otherwise = contarPalabras(sacarBlancosRepetidos(tail(lista))) 
+
+
+{-
+Ejercicio 4.3.: palabras Dada una lista arma una nueva lista con las palabras de la lista original. Cuando hay un espacio termina la palabra y debería crear una nueva lista y concatenarsela.
+"hola     es     una   prueba" -> quito espacios "hola es una prueba" -> ["hola", "es", "una", "prueba"]
+El proceso sería algo así:
+h == ' '? no, por lo tanto agrego la h a una nueva secuencia 
+o == ' '? no, por lo tanto agrego la h a la secuencia anterior creada.
+l == ' '? no, por lo tanto agrego la h a la secuencia anterior creada.
+a == ' '? no, por lo tanto agrego la h a la secuencia anterior creada.
+' ' == ' '? sí, por lo tanto acá terminó la palabra, debería de crear un nuevo "indice" para la siguiente palabra.
+e == ' '? no, por lo tanto agrego la e a la nueva secuencia.
+s == ' '? no, por lo tanto agrego la s a la secuencia anterior creada.
+hasta ahora ["hola", "es"]
+y así sucesivamente.
+
+Si ya la cola de la lista es vacia, entonces retorno []
+-}
+
+{-
+    
+-}

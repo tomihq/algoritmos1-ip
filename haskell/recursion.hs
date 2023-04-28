@@ -290,3 +290,16 @@ mcd a b = mcd b (mod a b)
     Ejercicio 18. Implemente mayorDigitoPar :: Integer -> Integer tal que resultado es el mayor digito par de n. En caso de no tener digitos pares, retornar -1.
 
 -}
+
+{-Ejercicio 19.esSumaInicialDePrimos
+Entrada: n = 5
+Tengo que encontrar dos primos tal que n1 + n2 = 5. Si n1 + n2 es mayor que 5 entonces retorno false.
+En este caso, 2 + 3 = 5 (los primeros primos).
+
+-}
+
+esSumaInicialDePrimos :: Integer -> Bool
+esSumaInicialDePrimos n = esSumaInicialDePrimos n
+
+esSumaInicialDePrimosAux :: Integer -> Integer -> Bool
+esSumaInicialDePrimosAux n primo | 
