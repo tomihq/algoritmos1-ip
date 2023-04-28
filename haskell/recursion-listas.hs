@@ -256,3 +256,14 @@ y así sucesivamente.
 
 Si ya la cola de la lista es vacia, entonces retorno []
 -}
+
+
+{-
+    Ejercicio 4.5 aplanar: A partir de una lista de palabras arma una lista de caracteres concatenandola
+    ["H", "O", "L","A", " "] => "Hola"
+-}
+
+aplanar :: [[Char]] -> [Char]
+aplanar [] = []
+aplanar [x] = x
+aplanar (x:xs) = x ++ aplanar(xs) --Voy concatenando el valor a una nueva lista.
