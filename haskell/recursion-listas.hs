@@ -227,15 +227,17 @@ sacarBlancosRepetidos (x:xs)
 {-
 Ejercicio 4.2: contarPalabras -> Recibo un palabra, mando a sacarBlancosRepetidos y la cantidad de espacios que hay, es la cantidad de palabras que hay.
 Esta    es   una prueba  -> Esta es una prueba -> 3 espacios = 4 palabras.
-nada = 0 palabras
+(nada) = 0 palabras
 h = 1 palabra
+hola                = 1 palabra
 -}
 
 contarPalabras :: [Char] -> Integer
 contarPalabras [] = 0
 contarPalabras lista  | tail(lista) ==  [] = 1
-contarPalabras lista  | head(sacarBlancosRepetidos lista) == ' ' = 1 + contarPalabras(sacarBlancosRepetidos (tail(lista)))
-contarPalabras lista  | otherwise = contarPalabras(sacarBlancosRepetidos(tail(lista))) 
+contarPalabras lista  | head lista == ' ' && head(tail(lista)) == ' ' = contarPalabras(tail(lista))
+contarPalabras lista  | head lista == ' ' && head(tail(lista)) /= ' ' =  1 + contarPalabras(tail(lista))
+contarPalabras lista  | otherwise = contarPalabras(tail(lista)) 
 
 
 {-
@@ -253,8 +255,4 @@ hasta ahora ["hola", "es"]
 y así sucesivamente.
 
 Si ya la cola de la lista es vacia, entonces retorno []
--}
-
-{-
-    
 -}
