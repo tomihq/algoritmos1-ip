@@ -112,6 +112,20 @@ hayRepetidos lista | longitud(lista) == 1 = False
                    | longitud(lista) /= 0 && head(lista) == ultimo(tail(lista)) = True
                    | otherwise = hayRepetidos(tail(lista))
 
+{-Ejercicio 2.5 quitar: Dada una lista xs y un elemento x, elimina la primera aparicion de x en la lista xs (corto recursividad cuando lo encuentra). Retorno, el elemento si se encuentra será la cabeza por lo tanto deberia ir creando una nueva lista con cada elemento y cuando coincide el que busco NO lo agrego sino que devuelvo la lista realizada hasta ese momento + la cola.
+[1, 3, 2, 2, 4, 4, 5] -> a eliminar el numero 2.
+[1, 3, 2, 2, 4, 4, 5] -> no hace nada pues 2 != 1 -> [1]
+[1, 3, 2, 2, 4, 4, 5] -> no hace nada pues 2 != 3 -> [1, 3]
+[1, 3, 2, 4, 4, 5] -> al ser 2 = 2 entonces retorno la lista armada hasta ese momento [1, 3] + la cola [2, 4, 4, 5].
+
+En cada llamada recursiva de la función quitar, se construye una nueva lista que comienza con el valor actual de x (siempre que x no sea igual a elem, en cuyo caso no se agrega x a la lista resultante) y luego se agrega la cola de la lista modificada. De esta forma, se va construyendo una nueva lista a partir de la original, en la que se eliminó la primera aparición de elem.
+
+-}
+quitar :: Eq(t) => t -> [t] -> [t]
+quitar _ []  = []
+quitar elem (x:xs)  | x == elem = xs
+                    | otherwise = x : quitar elem xs 
+
 {-
     Ejercicio 2.6 quitarTodos: dada una lista xs y un elemento x, elimina la primera aparicion de x en la lista xs (de haberla).
     Tengo un elemento y una lista:
@@ -134,10 +148,50 @@ quitarAux _ [] listaAux = listaAux
 quitarAux elemento (x:xs) listaAux | x == elemento = quitarAux elemento xs listaAux
                                    | otherwise = quitarAux elemento xs (listaAux ++ [x])
 
+{-Ejercicio 2.7: eliminarRepetidos: Deja una lista una unica aparicion de cada elemento, eliminando las repeticiones adicionales.
+Lo que puedo hacer es que cada elemento que elimino por completo (quitarTodos) lo agrego una vez.
+Por cada elemento que tiene la lista, llamo a eliminarRepetidos con quitarTodos.
+-}
+
+eliminarRepetidos :: (Eq t) => [t] -> [t]
+eliminarRepetidos [] = []
+eliminarRepetidos (x:xs) = [x] ++ eliminarRepetidos(quitarTodos x xs)
+
+{-Ejercicio 2.8: mismosElementos
+Retorna verdadero sí y solamente ambasl istas contienen los mismos elementos.
+1) Valido eliminando TODOS LOS repetidos, si una lista es mas grande que otra, entonces significa que no tienen los mismos elementos.
+2) Valido si el elemento de la lista 1 está en la lista 2 y viceversa.
+3) Si solo tienen dos elementos, entonces comparo solo sus cabezas.
+Entrada: [3, 1, 3] y [2, 4, 5] retornará false pues al llamar a eliminarRepetidos queda [3,1] y [2, 4, 5] y no tienen la misma longitud. = False.
+Entrada2:  [1, 1, 3] y [3, 3, 1] retornará true pues a llamar eliminarRepetidos queda [1, 3] y [3, 1] y ambos listas tienen los mismos elementos
+Entrada3: [1,2,3] [3,2,1] -- devuelve True
+Entrada4: [1,2,3] [1,2,3,4] -- devuelve False
+Entrada5: [1,1,2,3] [1,2,3] -- devuelve True
+Entrada6: "abc" "cab" -- devuelve True
+Entrada7: "abc" "cba" -- devuelve True
+
+OJO CON IR quitando la cola de la otra lista porque de esta forma puede ser que la lista no tenga el mismo orden y jamas encuentre al elemento
+-}
+
+mismosElementos :: (Eq t) => [t] -> [t] -> Bool
+mismosElementos lista1 lista2 | longitud(eliminarRepetidos lista1) == longitud(eliminarRepetidos lista2) = mismosElementosAux lista1 lista2 
+                              | otherwise = False
+
+mismosElementosAux :: (Eq t) => [t] -> [t] -> Bool
+mismosElementosAux [] _ = True
+mismosElementosAux (x:xs) lista2 | pertenece x lista2 = mismosElementosAux xs lista2
+                                 | otherwise = False
+
+{-Ejercicio 2.9. capicua: Si una lista es capicua retorno True 
+Ej: neuquen, acbbca, anna, otto, mom, arenera
+-}
+
+capicua :: (Eq t) => [t] -> Bool
+capicua lista = lista == reverso(lista) 
 
 {-
     Ejercicio 3.1 Sumatoria. Hacer una sumatoria de los valores de la lista.
--}
+-}  
 
 sumatoria :: [Integer] -> Integer 
 sumatoria [] = 0
@@ -154,7 +208,16 @@ productoria (x:xs) = x * productoria(xs)
 {-
     Ejercicio 3.3 maximo de una lista.
     La lista debe tener minimo 1 elemento por lo tanto no hace falta verificarlo.
+    Recursividad debe ser llamada para comparar x con el otro valor.
+
+    Comparar x con todos los elementos de la lista, hasta que llego a una lista de tipo [x] que me devuelve x, es decir para
+    [4,2,3] el programa haria 4 > maximo([3,2]) -> 4 > 2 > maximo([3]) -> 4 > 2 > 3 y no sigue preguntando pues el caso base es que la lista retorne un elemento.
 -}
+
+maximo :: [Integer] -> Integer
+maximo [x] = x
+maximo (x:xs) | x>=maximo(xs) = x
+              | otherwise = maximo(xs)
 
 {-
     Ejercicio 3.4 sumarN: Dado un n y una lista, sumar n a cada elemento de la lista.
@@ -205,6 +268,7 @@ multiplosDeN :: Integer -> [Integer] -> [Integer]
 multiplosDeN n (x:xs) | longitud(xs) == 0 = xs
                       | mod x n == 0 = x : multiplosDeN n xs
                       | otherwise = multiplosDeN n xs
+
 
 {-
 Ejercicio 4.1: sacarBlancosRepetidos: Reemplaza cada subsecuencia de blancos contiguos de la primera lista por un solo blanco en la segunda lista.
@@ -260,10 +324,28 @@ Si ya la cola de la lista es vacia, entonces retorno []
 
 {-
     Ejercicio 4.5 aplanar: A partir de una lista de palabras arma una lista de caracteres concatenandola
-    ["H", "O", "L","A", " "] => "Hola"
+    [] => "Hola"
 -}
 
 aplanar :: [[Char]] -> [Char]
 aplanar [] = []
 aplanar [x] = x
 aplanar (x:xs) = x ++ aplanar(xs) --Voy concatenando el valor a una nueva lista.
+
+{-
+    Ejercicio 4.6: aplanarConBlancos:  que a partir de una lista de palabras, arma una lista de caracteres
+concatenándolas e insertando un blanco entre cada palabra
+-}
+
+--Lo mismo que la de arriba pero por cada vez que termina una palabra agrego espacio.
+aplanarConBlancos :: [[Char]] -> [Char]
+aplanarConBlancos lista = aplanarConBlancosAux lista (longitud lista)
+
+aplanarConBlancosAux :: [[Char]] -> Integer -> [Char]
+aplanarConBlancosAux palabras cantidad | cantidad == 0 = []
+                                       | otherwise = recorrerPalabra palabras (longitud(palabras))
+
+recorrerPalabra :: [[Char]] -> Integer -> [Char] 
+recorrerPalabra [] _ = []
+recorrerPalabra [x] _ = x
+recorrerPalabra (x:xs) letra = x ++ ' ' : recorrerPalabra xs (letra-1)
