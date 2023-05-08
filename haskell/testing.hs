@@ -21,3 +21,8 @@
 --Ejercicio 6. Diseñar los casos de test de caja negra utilizando el método de partición por categorı́as para los siguientes problemas
 
 --1. multiplosDeN :: Integer -> [Integer] -> [Integer] que dado un número n y una lista xs, devuelve una lista con los elementos de xs múltiplos de n. (Ej 3.8 de la Guía 5)
+module MultiplosDeN where 
+multiplosDeN :: Integer -> [Integer] -> [Integer]
+multiplosDeN _ [] = []
+multiplosDeN n (x:xs) | (mod x n) == 0 = x:multiplosDeN n xs
+                      | otherwise = multiplosDeN n xs
