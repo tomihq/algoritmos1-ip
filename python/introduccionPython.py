@@ -64,6 +64,25 @@ def es_par(numero: int)-> bool:
 
 ##def cantidad_de_pizzas(comensales: int, min_cant_de_porciones: int) -> int:
 
+#Ejercicio 3. Resuelva los siguientes ejercicios utilizando los operadores logicos and, or, not. Resolverlos sin utilizar el if.
+
+#Ejercicio 3.1 alguno_es_0(numero1, numero2): Dados dos numeros racionales decide si alguno de los dos es igual a 0
+
+def alguno_es_0(numero1: float, numero2: float) -> bool:
+    return (numero1 == 0) or (numero2 == 0)
+
+#Ejercicio 3.2: ambos_son_0 lo mismo que antes pero los dos iguales a 0.
+def ambos_son_cero(numero1: float, numero2: float) -> bool:
+    return (numero1 == 0) and (numero2 == 0)
+
+#Ejercicio 3.3 es_nombre_largo dado un parámetro de entrada de tipo String que sea in, valida si la longitud del nombre esta entre 3 y 8 inclusive. 
+
+def es_nombre_largo(nombre: str) -> bool:
+    return (len(nombre)>=3 and len(nombre)<=8)
+
+#Ejercicio 3.4 es_bisiesto(año) indica si un año tiene 366 dias. REcordar que un año es bisiesto si es multiplo de 400, o bien es multiplo de 4 pero no de 100.
+def es_bisiesto(anio: str) -> bool: 
+    return (es_multiplo_de(anio, 400) or (es_multiplo_de(anio, 4) and not(es_multiplo_de(anio, 100))))
 
 ejercicio1 = raizDe2();
 print(ejercicio1);
@@ -85,3 +104,21 @@ ejercicio2_5 = es_par(1); #Expected False
 print(ejercicio2_5)
 ejercicio2_5_bis = es_par(2) #Expected True
 print(ejercicio2_5_bis);
+ejercicio3_1 = alguno_es_0(0, 2) #Expected True.
+print(ejercicio3_1)
+ejercicio3_2 = ambos_son_cero(0, 0) #Expeted True - (0, 1) False, (2, 0) False.
+print(ejercicio3_2);
+ejercicio3_3 = es_nombre_largo('To') #Expected False
+print(ejercicio3_3)
+ejercicio3_3_1 = es_nombre_largo('Tom') #Expected True
+print(ejercicio3_3_1)
+ejercicio3_3_2 = es_nombre_largo('Tomas Tom') #Expected False
+print(ejercicio3_3_2)
+ejercicio3_3_3 = es_nombre_largo('Tomas T') #Expected True
+print(ejercicio3_3_3)
+ejercicio3_4 = es_bisiesto(2024) #Expected True
+print(ejercicio3_4)
+ejercicio3_4_2 = es_bisiesto(2016) #Expected True
+print(ejercicio3_4_2)
+ejercicio3_4_2 = es_bisiesto(2015) #Expected False
+print(ejercicio3_4_2)
