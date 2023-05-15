@@ -80,9 +80,22 @@ def ambos_son_cero(numero1: float, numero2: float) -> bool:
 def es_nombre_largo(nombre: str) -> bool:
     return (len(nombre)>=3 and len(nombre)<=8)
 
-#Ejercicio 3.4 es_bisiesto(año) indica si un año tiene 366 dias. REcordar que un año es bisiesto si es multiplo de 400, o bien es multiplo de 4 pero no de 100.
+#Ejercicio 3.4 es_bisiesto(año) indica si un año tiene 366 dias. Recordar que un año es bisiesto si es multiplo de 400, o bien es multiplo de 4 pero no de 100.
 def es_bisiesto(anio: str) -> bool: 
     return (es_multiplo_de(anio, 400) or (es_multiplo_de(anio, 4) and not(es_multiplo_de(anio, 100))))
+
+"""
+Ejercicio 4. Usar min y max. En una plantacion de pinos de cada arbol se conoce la altura expresada en metros. EL peso de un pino se pude estimar a partir de la altura d la siguiente manera:
+  3kg por CADA CENTIMETRO hasta 3 metros.
+  2kg por CADA CENTIMETRO arriba de los 3 metros.
+Por ejemplo, 2 metros pesan 600kg porque 200 * 3 = 600
+5 metros pesan 1300kg, porque los primeros 3 metros pesan 900kg y los siguientes pesan los 400 restantes.
+
+Los pinos se usan para llevarlos a una fabrica de muebles a la que le sirvven arboles de entre 400 y 1000 kilos, un pino fuera de este rango NO sirve a la fabrica.
+
+
+"""
+
 
 ejercicio1 = raizDe2();
 print(ejercicio1);
