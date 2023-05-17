@@ -60,9 +60,12 @@ def es_par(numero: int)-> bool:
 
 #Ejercicio 2.6 cantidad_de_pizzas(comensales, min_cant_de_porciones)
 #Que devuelva la cantidad de pizzas que necesitamos para que cada comensal coma como minimo min_cant_de_porciones porciones de pizza. Considere que cada pizza tiene 8 porciones y que se prefiere que sobren porciones.
-#comensales = 4, min_cant_de_porciones = 5, se necesitan 20 porciones de pizza (5*4) = 20. ¿Cuantas pizzas necesito? Necesitaría 3 pizzas pues 8 + 8 + 8 = 24 y 24 es mayor que 20.
+#comensales = 4, min_cant_de_porciones = 5, se necesitan 20 porciones de pizza (5*4) = 20. ¿Cuantas pizzas necesito? Necesitaría= 24/3 pizzas par no estar justo, se agrega una pizza mas por si acaso.
 
 ##def cantidad_de_pizzas(comensales: int, min_cant_de_porciones: int) -> int:
+
+def cantidad_de_pizzas(comensales: int, min_cant_de_porciones: int) -> int:
+    return (comensales*min_cant_de_porciones/8)+1
 
 #Ejercicio 3. Resuelva los siguientes ejercicios utilizando los operadores logicos and, or, not. Resolverlos sin utilizar el if.
 
@@ -92,13 +95,24 @@ Por ejemplo, 2 metros pesan 600kg porque 200 * 3 = 600
 5 metros pesan 1300kg, porque los primeros 3 metros pesan 900kg y los siguientes pesan los 400 restantes.
 
 Los pinos se usan para llevarlos a una fabrica de muebles a la que le sirvven arboles de entre 400 y 1000 kilos, un pino fuera de este rango NO sirve a la fabrica.
-
-
 """
+def calcular_peso_pino(altura: int) -> int:
+    if altura <= 3:
+        peso = altura * 100 * 3  # altura en centímetros * 3 kg por cada centímetro
+    else:
+        peso_primeros_tres_metros = 3 * 100 * 3  # primeros 3 metros pesan 900 kg
+        peso_adicional = (altura - 3) * 100 * 2  # peso adicional por cada centímetro arriba de los 3 metros
+        peso = peso_primeros_tres_metros + peso_adicional
+    
+    return peso
 
+def es_peso_util(peso: int) -> bool:
+    return peso>=400 and peso <= 1000
+
+def sirve_pino(altura: int) -> bool:
+    return es_peso_util(calcular_peso_pino(altura))
 
 ejercicio1 = raizDe2();
-print(ejercicio1);
 ejercicio1_2 = imprimir_hola();
 ejercicio1_3 = imprimir_un_verso();
 ejercicio1_4 = factorial_de_dos();
@@ -106,32 +120,27 @@ ejercicio1_5 = factorial_de_tres();
 ejercicio1_6 = factorial_de_cuatro();
 ejercicio1_7 = factorial_de_cinco();
 ejercicioExtraFactorialGenerico = factorial_generico(5);
-print(ejercicioExtraFactorialGenerico);
 ejercicio2_1 = imprimir_saludo('Tomás');
 ejercicio2_2 = raiz_cuadrada_de(49); #Expected 7.
-print(ejercicio2_2)
 ejercicio2_3 = imprimir_dos_veces('I wanna runnaway')
 ejercicio2_4 = es_multiplo_de(4, 2);
-print(ejercicio2_4)
 ejercicio2_5 = es_par(1); #Expected False
-print(ejercicio2_5)
 ejercicio2_5_bis = es_par(2) #Expected True
-print(ejercicio2_5_bis);
 ejercicio3_1 = alguno_es_0(0, 2) #Expected True.
-print(ejercicio3_1)
 ejercicio3_2 = ambos_son_cero(0, 0) #Expeted True - (0, 1) False, (2, 0) False.
-print(ejercicio3_2);
 ejercicio3_3 = es_nombre_largo('To') #Expected False
-print(ejercicio3_3)
 ejercicio3_3_1 = es_nombre_largo('Tom') #Expected True
-print(ejercicio3_3_1)
 ejercicio3_3_2 = es_nombre_largo('Tomas Tom') #Expected False
-print(ejercicio3_3_2)
 ejercicio3_3_3 = es_nombre_largo('Tomas T') #Expected True
-print(ejercicio3_3_3)
 ejercicio3_4 = es_bisiesto(2024) #Expected True
-print(ejercicio3_4)
 ejercicio3_4_2 = es_bisiesto(2016) #Expected True
-print(ejercicio3_4_2)
 ejercicio3_4_2 = es_bisiesto(2015) #Expected False
-print(ejercicio3_4_2)
+ejercicio4 = sirve_pino(2) #Expected True pues el peso del pino serian 600kg.
+"""
+Envio 4m.
+Si cortamos la cuenta hasta los 3 metros que serian 300 cm deberiamos hacer 300 * 3 = 900kg.
+nos quedan por calcular 1m, entonces 100 * 2 = 200kg
+
+total 1100kg. ¿le sirve a la fabrica? no.
+"""
+ejercicio4_1 = sirve_pino(4) #Expected False
