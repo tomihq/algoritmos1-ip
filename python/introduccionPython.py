@@ -112,18 +112,189 @@ def es_peso_util(peso: int) -> bool:
 def sirve_pino(altura: int) -> bool:
     return es_peso_util(calcular_peso_pino(altura))
 
-ejercicio1 = raizDe2();
-ejercicio1_2 = imprimir_hola();
-ejercicio1_3 = imprimir_un_verso();
-ejercicio1_4 = factorial_de_dos();
-ejercicio1_5 = factorial_de_tres();
-ejercicio1_6 = factorial_de_cuatro();
-ejercicio1_7 = factorial_de_cinco();
-ejercicioExtraFactorialGenerico = factorial_generico(5);
-ejercicio2_1 = imprimir_saludo('Tomás');
+"""
+Ejercicio 5.1 Si el numero es par devolver el doble, caso contrario, retornar el mismo numero.
+"""
+def devolver_el_doble_si_es_par (n: int) -> int:
+    if(es_par(n)):
+        return n * 2
+    return n
+
+"""
+Ejercicio 5.2: Devolver el mismo numero si es par, mientras que si NO es par retornar el que le sigue.
+    Analizar distintas formas de implementación (usando un
+    if-then-else, y 2 if), ¿todas funcionan?
+
+    Sí, todas funcionan, pero el comportamiento no es el mismo.
+    Si usamos un if if siempre entrará a ambos.
+    Si usamos un if else if, entrará al primero (si se cumple la condicion) sino, verifica si se cumple la segunda condicion, si se cumple la segunda condicion hace lo que tenga que hacer pero si no, debe entrar a un else.
+    Si usamos un if else hay solo dos opciones, o entra a la primera condicion o cae si o si en la segunda (else)
+
+    En este caso, como solo tenemos dos opciones (que sea par o no) nos basta con un if else.
+"""
+
+def devolver_valor_si_es_par_sino_el_que_sigue(n: int) -> int:
+    if(es_par(n)):
+        return n
+    else:
+        return n+1
+
+"""
+    Ejercicio 5.3
+    devolver el doble si es multiplo3 el triple si es multiplo9(un numero). En otro caso devolver el número original. Analizar distintas formas de implementación (usando un if-then-else, y 2 if, usando alguna opción de operación
+    lógica), ¿todas funcionan?.
+    Si es multiplo de 3 devuelvo num * 2
+    Si es multiplo de 9 devuelvo num * 3
+    Caso contrario, devuelvo el numero original.
+    Si es multiplo de 9, también es múltiplo de 3. Por lo tanto, priorizo este caso del 9 por encima del 3.
+
+    Aquí, nos sirve un if, else if, y un else pues tenemos 3 casos a evaluar (por separado, no puede entrar a los 3)
+    Si solo usamos if else nos faltaría un caso.
+"""
+def devolver_el_doble_si_es_multiplo3_el_triple_si_es_multiplo_9(n: int) -> int:
+    if(es_multiplo_de(n, 9)):
+        return n * 3
+    elif(es_multiplo_de(n, 3)):
+        return n * 2
+    else:
+        return n
+
+"""
+Ejercicio 5.4:
+Dado un nombre, si la longitud es igual o mayor a 5 devolver una frase que diga "Tu nombre tiene muchas letras!" y
+sino, "Tu nombre tiene menos de 5 caracteres".
+"""
+
+def retornar_frase_segun_longitud_nombre(nombre: str) -> str:
+    if(len(nombre)>=5):
+        return "Tu nombre tiene muchas letras"
+    else:
+        return "Tu nombre tiene menos de 5 caracteres"
+    
+"""
+Ejercicio 5.5: En Argentina una persona del sexo femenino se jubila a los 60 años, mientras que aquellas del sexo masculino se jubilan
+a los 65 años. Quienes son menores de 18 años se deben ir de vacaciones junto al grupo que se jubila. Al resto de
+las personas se les ordena ir a trabajar. Implemente una función que, dados los parámetros de sexo (F o M) y edad,
+imprima la frase que corresponda según el caso: “Andá de vacaciones” o “Te toca trabajar”.
+Si es sexo femenino y tiene 60 años entonces se va de vacaciones "Andá de vacaciones".
+Si es sexo masculino y tiene 65 años entonces se va de vacaciones "Andá de vacaciones".
+Si es menor a 18 años se deben de ir de vacaciones "Andá de vacaciones".
+Caso contrario, "te toca trabajar"
+"""
+
+def que_corresponde(sexo: str, edad: int):
+    if(edad<18):
+        return "Andá de vacaciones"
+    elif((sexo == 'M' and edad >= 65) or (sexo == 'F' and edad >= 60)):
+        return "Andá de vacaciones"
+    else: 
+        return "Te toca trabajar"
+
+""" 
+ Utilizando While, en todo el ejercicio 6...
+ Ejercicio 6.1: Escribir una función que imprima los números del 1 al 10.
+"""
+
+def imprimir_numeros_1_al_10() -> None:
+    n = 1
+    while(n<=10):
+        print(n)
+        n+=1
+
+"""
+    Ejercicio 6.2: Escribir una función que imprima los números pares entre el 10 y el 40.
+"""
+
+def escribir_numeros_pares_desde_10_hasta_40() -> None:
+    n = 10
+    while(n<=40):
+        if(es_par(n)):
+            print(n)
+        n+=1
+"""
+    Ejercicio 6.3: Escribir una función que imprima la palabra “eco” 10 veces.
+"""
+
+def imprimir_eco_10_veces() -> None:
+    n = 1
+    while(n<=10):
+        print('eco')
+        n+=1
+
+"""
+    Ejercicio 6.4: Escribir una funcion de cuenta regresiva para lanzar un cohete. Dicha función irá imprimiendo desde el número que me pasan por parámetro (que sería positivo) hasta el 1, y por ultimo “Despegue”.
+"""
+
+def cuenta_regresiva(n: int) -> None:
+    while(n>=1):
+        print(n)
+        if(n==1):
+            print("Despegue")
+        n-=1
+
+"""
+    Ejercicio 6.5: Hacer una función que monitoree un viaje en el tiempo. Dicha función recibe dos parámetros, “el año de partida” y “algún año de llegada”, siendo este último parámetro siempre más chico que el primero. El viaje se realizará de a saltos de un año y la función debe mostrar el texto: “Viajó un año al pasado, estamos en el año: <año>” cada vez que se realice un salto de año.
+
+    Volver al pasado.
+"""
+
+def viaje_en_el_tiempo(anioDePartida: int, anioDeLlegada: int) -> None:
+    while(anioDePartida>anioDeLlegada):
+        anioDePartida-=1
+        print("Viajó un año al pasado, estamos en el año: " + str(anioDePartida))
+
+"""
+    Ejercicio 6.6: Implementar de nuevo la función de monitoreo de viaje en el tiempo, pero desde el año de partida hasta lo más cercano al 384 a.C., donde conoceremos a Aristóteles. Y para que sea mas rapido el viaje, ¡vamos a viajar de a 20 años en cada salto!
+"""
+
+def viaje_en_el_tiempo_ac(anioDePartida: int, anioDeLlegada: int) -> None:
+    while(anioDePartida>anioDeLlegada):
+        anioDePartida-=20
+        print("Viajó un año al pasado, estamos en el año: " + str(anioDePartida))
+
+"""
+Ejercicio 7. Lo mismo que los del 6 pero con for.
+Recordar que el inrange es de esta forma [1, 11) por lo tanto acá iria desde el 1 hasta el 10 pues, el 11 no está incluido
+"""
+        
+def imprimir_numeros_1_al_10_for() -> None:
+    for num in range(1, 11):
+        print(num)
+
+def escribir_numeros_pares_desde_10_hasta_40_for() -> None:
+    for n in range (10, 41):
+        if(es_par(n)):
+            print(n)
+
+def imprimir_eco_10_veces() -> None:
+    for n in range (1, 11):
+        print('eco')
+
+def cuenta_regresiva_for(n: int) -> None:
+    for n in range(n, 0, -1):
+        print(n)
+        if(n==1):
+            print("Despegue")
+
+
+def viaje_en_el_tiempo_for(anioDePartida: int, anioDeLlegada: int) -> None:
+    for anio in range(anioDePartida-1, anioDeLlegada-1, -1):
+        print("Viajó un año al pasado, estamos en el año: " + str(anio))
+
+
+
+ejercicio1 = raizDe2()
+ejercicio1_2 = imprimir_hola()
+ejercicio1_3 = imprimir_un_verso()
+ejercicio1_4 = factorial_de_dos()
+ejercicio1_5 = factorial_de_tres()
+ejercicio1_6 = factorial_de_cuatro()
+ejercicio1_7 = factorial_de_cinco()
+ejercicioExtraFactorialGenerico = factorial_generico(5)
+ejercicio2_1 = imprimir_saludo('Tomás')
 ejercicio2_2 = raiz_cuadrada_de(49); #Expected 7.
 ejercicio2_3 = imprimir_dos_veces('I wanna runnaway')
-ejercicio2_4 = es_multiplo_de(4, 2);
+ejercicio2_4 = es_multiplo_de(4, 2)
 ejercicio2_5 = es_par(1); #Expected False
 ejercicio2_5_bis = es_par(2) #Expected True
 ejercicio3_1 = alguno_es_0(0, 2) #Expected True.
@@ -144,3 +315,26 @@ nos quedan por calcular 1m, entonces 100 * 2 = 200kg
 total 1100kg. ¿le sirve a la fabrica? no.
 """
 ejercicio4_1 = sirve_pino(4) #Expected False
+ejercicio5_1 = devolver_el_doble_si_es_par(4) #Expected 4.
+ejercicio5_2 = devolver_valor_si_es_par_sino_el_que_sigue(3) #Expected 4
+ejercicio5_3 = devolver_el_doble_si_es_multiplo3_el_triple_si_es_multiplo_9(6) #Expected 12
+ejercicio5_3_2 = devolver_el_doble_si_es_multiplo3_el_triple_si_es_multiplo_9(9) #Expected 27
+ejercicio5_3_3 = devolver_el_doble_si_es_multiplo3_el_triple_si_es_multiplo_9(14) #Expected 14
+ejercicio5_4 = retornar_frase_segun_longitud_nombre('Tomás Hernández') #Expected "Tu nombre tiene muchas letras"
+ejercicio5_4_1 = retornar_frase_segun_longitud_nombre('Tom') #Expected "Tu nombre tiene menos de 5 caracteres"
+ejercicio5_5 = que_corresponde("M", 17) #Expected "Andá de vacaciones"
+ejercicio5_5_2 = que_corresponde("M", 60) #Expected "Te toca trabajar"
+ejercicio5_5_3 = que_corresponde("M", 65) #Expected "Andá de vacaciones"
+ejercicio5_5_4 = que_corresponde("F", 60) #Expected "Andá de vacaciones"
+ejercicio5_5_5 = que_corresponde("F", 55) #Expected "Te toca trabajar"
+ejercicio6_1 = imprimir_numeros_1_al_10();
+ejercicio6_2 = escribir_numeros_pares_desde_10_hasta_40();
+ejercicio6_3 = imprimir_eco_10_veces();
+ejercicio6_4 = cuenta_regresiva(10);
+ejercicio6_5 = viaje_en_el_tiempo(2016, 2010)
+ejercicio6_6 = viaje_en_el_tiempo_ac(2023, 384)
+ejercicio7_1 = imprimir_numeros_1_al_10_for();
+ejercicio7_2 = escribir_numeros_pares_desde_10_hasta_40_for();
+ejercicio7_3 = cuenta_regresiva_for(15)
+ejercicio7_4 = viaje_en_el_tiempo_for(2016, 2010)
+ejercicio7_5 = viaje_en_el_tiempo_ac_for(2023, 384)
