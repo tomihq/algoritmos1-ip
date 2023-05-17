@@ -281,7 +281,54 @@ def viaje_en_el_tiempo_for(anioDePartida: int, anioDeLlegada: int) -> None:
     for anio in range(anioDePartida-1, anioDeLlegada-1, -1):
         print("Viajó un año al pasado, estamos en el año: " + str(anio))
 
+"""
+Ejercicio 8: Preguntar qué es ejecución simbolica.
+"""
 
+"""
+Ejercicio 9: Sea el siguiente código:
+
+def rt(x: int, g: int) -> int:
+    g = g + 1
+    return x + g
+
+g: int = 0
+def ro(x: int) -> int:
+    global g
+    g = g + 1
+    return x + g
+
+1. ¿Cuál es el resultado de evaluar tres veces seguidas ro(1)?
+
+Considerando que g es una variable entera declarada en el ámbito global, ejecutar ro(1) paso a paso sería:
+a. Al mencionar "global g" estamos haciendo referencia a la variable que vive en el ámbito global, y la llamamos con esta palabra reservada pues, queremos hacer modificaciones a ella directamente.
+b. El valor de g se incrementa por uno cada vez que ingresa, por lo tanto, si ingresa 3 veces, el valor de ro(1) al ejecutarla 3 veces será g = 3 pues...
+    1.a g = 0 + 1 = 1
+    2.a g = 1 + 1 = 2
+    3.a g = 2 + 1 = 3 
+
+Por lo tanto, si nosotros llamamos ro(1) 3 veces seguidas, el retorno por cada llamado sería:
+    1.b 1 + (1.a) = 2
+    2.b 1 + (2.a) = 3.
+    3.b 1 + (3.a) = 4
+Vemos que, el retorno siempre cambiará pues en cada llamado, incrementamos el valor de la variable global por 1.
+
+2. ¿Cuál es el resultado de evaluar tres veces seguidas rt(1, 0)?
+def rt(x: int, g: int) -> int:
+    g = g + 1
+    return x + g
+
+Para empezar, podemos distinguir que ahora, la variable g que nos ingresa por parámetro NO hace referencia a la que vive en el ámbito global por lo tanto, podemos restar posibilidades de mutar otras variables de otro scope.
+Como estamos usando todo mediante parámetros, todas las operaciones dependen de ellos y no se afectan una y otra vez.
+Por lo tanto, el resultado de evaluar tres veces seguidas rt(1, 0) siempre será el mismo => 2.
+    
+3. En cada función, realizar la ejecución simbólica.
+    Preguntar qué es ejecución simbolica
+4. Dar la especificación en lenguaje natural para cada función, rt y ro. 
+    rt: Sean dos variables de entrada x y g de tipo enteros (validar si serian in, out o inout), el resultado de la función es el valor de x + el valor de g incrementado en 1.
+    ro: Sea una variable de entrada x de tipo entero (in) y la referencia a una valor de una variable g global que será modificada directamente (in out), el resultado de la función es el valor de x + el valor de g incrementado en 1.
+    TODO: Preguntar como hablo de variables globales en lenguaje natural y su modificación dentro de las funciones.
+"""
 
 ejercicio1 = raizDe2()
 ejercicio1_2 = imprimir_hola()
