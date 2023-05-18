@@ -349,3 +349,43 @@ recorrerPalabra :: [[Char]] -> Integer -> [Char]
 recorrerPalabra [] _ = []
 recorrerPalabra [x] _ = x
 recorrerPalabra (x:xs) letra = x ++ ' ' : recorrerPalabra xs (letra-1)
+
+{-
+Ejercicio 5.1. Recibe un numero no negativo y lo transforma en su lista de bits correspondiente a su representación binaria.
+Recordar que una vez que tengo la representacion, tengo que invertirla.
+-}
+
+nat2bin :: Integer -> [Integer]
+nat2bin 0 = [0]  -- Caso base: cuando el numero es 0.
+nat2bin n = reverso (calcularBinario n)  -- Revertimos el resultado obtenido por el auxiliar para obtener la representación binaria correcta
+
+calcularBinario :: Integer -> [Integer]
+calcularBinario 0 = []  -- Caso base cuando el numero es 0.
+calcularBinario n = (mod n 2) : calcularBinario (div n 2)  -- Agregamos el bit menos significativo y seguimos dividiendo el número entre 2
+
+{-
+    Ejercicio 5.2: De binario a numero natural. Cada uno era potencia de 2. 2^0, 2^1, 2^2...
+-}
+
+bin2nat :: [Integer] -> Integer
+bin2nat lista = bin2natAux (reverso lista) 0 
+
+bin2natAux :: [Integer] -> Integer -> Integer
+bin2natAux [] _ = 0
+bin2natAux (x:xs) indice = (x * 2^indice) + bin2natAux xs (indice+1)
+
+{-
+    Ejercicio 5.3: Recibe un numero no negativo y lo convierte a un hexadecimal.
+    Por ejemplo: 45 devuelve [2, 'D']
+-}
+
+
+--Ejercicio 5.4 sumaAcumulada [1, 2, 3, 4, 5] es [1, 3, 6, 10, 15].
+
+sumaAcumulada :: [Int] -> [Int]
+sumaAcumulada xs = sumaAcumuladaAux xs 0
+
+sumaAcumuladaAux :: [Int] -> Int -> [Int]
+sumaAcumuladaAux [] _ = []
+sumaAcumuladaAux (x:xs) acum = (x+acum):sumaAcumuladaAux xs (x+acum)
+
