@@ -80,7 +80,6 @@ print(ordenados(listaDesordenada2));
 
 """
     5. Dada una lista de palabras, devolver verdadero si alguna palabra tiene longitud mayor a 7.
-    
     res = True si y solo sí Existe una palabra perteneciente a la lista, que está dentro del rango de la lista 0<=i<=longitud(lista)-1 -> longitud(palabra[i])>7
 
 
@@ -96,3 +95,23 @@ palabras: list[str] = ["h", "hola", "hola como andan"]
 print(hay_palabra_con_mas_de_7_letras(palabras));
 palabras2: list[str] = ["h", "hola", "hola"]
 print(hay_palabra_con_mas_de_7_letras(palabras2));
+
+"""
+6. Dada una cadena de texto (string), devolver verdadero si esta es palíndroma (se lee igual en ambos sentidos), falso en caso contrario.
+
+Es lo mismo que capicua. Hago el reverso de la string y si es exáctamente igual entonces es True.
+"""
+
+def reverso(palabra: str):
+    return palabra[::-1]
+
+def es_palindroma(palabra: str):
+    return palabra == reverso(palabra)
+
+#Expected True
+print(es_palindroma('neuquen'))
+#Expected True
+print(es_palindroma('ana'))
+#Expected False
+print(es_palindroma('gasolina'))
+
