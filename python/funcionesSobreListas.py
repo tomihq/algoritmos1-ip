@@ -11,7 +11,7 @@
 
 """
 
-def pertenece(s: list[int], e: int):
+def pertenece(s: list[int], e: int) -> bool:
     for i in range(0, len(s)):
         if(s[i] == e): return True
     return False
@@ -26,7 +26,7 @@ print(pertenece(lista, 30));
     }
 """
 
-def divideATodos(s: list[int], e:int): 
+def divideATodos(s: list[int], e:int) -> bool: 
     cantidadVecesQueDivide = 0;
     for i in range(0, len(s)):
         if(s[i] % e) == 0: cantidadVecesQueDivide+=1
@@ -43,7 +43,7 @@ print(divideATodos(lista, 2));
     Nota: no utilizar la función sum() nativa
 """
 
-def sumaTotal(s: list[int]):
+def sumaTotal(s: list[int]) -> int:
     acum = 0;
     for i in range(0, len(s)):
         acum+=s[i]
@@ -61,7 +61,7 @@ print(sumaTotal(lista));
     Si el actual es mayor que el siguiente retorno False (ya encontré una excepción), caso contrario, dejo que termine de recorrer y devuelvo True. Si no entró al caso False es porque no había ninguno
 """
 
-def ordenados(s: list[int]):
+def ordenados(s: list[int]) -> bool:
     for i in range(0, len(s)):
         #Caso borde
         if(i == len(s)-1): return True
@@ -85,7 +85,7 @@ print(ordenados(listaDesordenada2));
 
 """
 
-def hay_palabra_con_mas_de_7_letras(listaPalabras: list[str]):
+def hay_palabra_con_mas_de_7_letras(listaPalabras: list[str]) -> bool:
     for i in range (0, len(listaPalabras)):
         if(len(listaPalabras[i])>7):
             return True; 
@@ -100,12 +100,14 @@ print(hay_palabra_con_mas_de_7_letras(palabras2));
 6. Dada una cadena de texto (string), devolver verdadero si esta es palíndroma (se lee igual en ambos sentidos), falso en caso contrario.
 
 Es lo mismo que capicua. Hago el reverso de la string y si es exáctamente igual entonces es True.
+
+res = True <-> reverso(palabra) == palabra
 """
 
-def reverso(palabra: str):
+def reverso(palabra: str) -> str:
     return palabra[::-1]
 
-def es_palindroma(palabra: str):
+def es_palindroma(palabra: str) -> bool:
     return palabra == reverso(palabra)
 
 #Expected True
@@ -115,3 +117,74 @@ print(es_palindroma('ana'))
 #Expected False
 print(es_palindroma('gasolina'))
 
+"""
+    7. Analizar la fortaleza de una contraseña. El parámetro de entrada sería un string con la contraseña a analizar, y la salida
+    otro string con tres posibles valores: VERDE, AMARILLA y ROJA. Nota: en python la “˜n/N” es considerado un caracter especial y no se comporta como cualquier otra letra.
+    
+    La contraseña sería VERDE si:
+        a) la longitud es mayor a 8 caracteres
+        b) Tiene al menos 1 letra minúscula (probar qué hace "a"<="A"<="z")
+        c) Tiene al menos 1 letra mayúscula Tiene al menos 1 letra minúscula (probar qué hace "A"<="A"<="Z"
+        )
+        d) Tiene al menos 1 dígito numérico (0..9) 
+   
+    La contraseña será roja si:
+    a) la longitud es menor a 5 caracteres.
+    
+    En caso contrario será AMARILLA.
+
+    El caso que evaluaré al principio será la longitud de la palabra, pues, es lo más corto y facil de validar.
+    
+    TODO: Investigar como en Python puedo validar si es minuscula o no sin utilizar funciones externas.
+"""
+
+
+
+def fortaleza_de_contraseña(contrasenia: str) -> str:
+    if(len(contrasenia)<5): 'ROJA'
+    return "TODO"
+
+"""
+    8. Dada una lista de tuplas, que representa un historial de movimientos en una cuenta bancaria, devolver el saldo actual.
+    Asumir que el saldo inicial es 0. Las tuplas tienen una letra que nos indica el tipo de movimiento “I” para ingreso de
+    dinero y “R” para retiro de dinero, y además el monto de cada operación. 
+    Por ejemplo [("I", 2000), ("R", 20),("R", 1000),("I", 300)] -> saldo = 1280.
+"""
+#Utilizo elif para evitar que me envien otra letra no reconocida y hacer una resta o suma cuando no corresponde.
+def historial_movimientos(movimientos: list[(str, int)]):
+    saldo = 0
+    for i in range (0, len(movimientos)):
+        if(movimientos[i][0] == 'I'): saldo += movimientos[i][1]
+        elif(movimientos[i][0] == 'R'): saldo -= movimientos[i][1]
+    return saldo
+
+print(historial_movimientos([("I", 2000), ("R", 20),("R", 1000),("I", 300)]))
+
+"""
+    9. Recorrer una palabra y devolver True si ésta tiene al menos 3 vocales distintas. En caso contrario devolver False.
+
+    1) Creo lista de qué letras son vocales.
+    2) Creo lista para almacenar las vocales de la palabra (no se aceptan repetidas) por lo tanto, antes tengo que validar si pertenece.
+    3) Si la cantidad de vocales es mayor o igual a 3, es true.
+"""
+
+def perteneceLetraALista(s: list[str], e: str) -> bool:
+    for i in range(0, len(s)):
+        if(s[i] == e): return True
+    return False
+
+vocales: list[str] = ["A", "E", "I", "O", "U"];
+def tiene_al_menos_tres_vocales(palabra: str):
+    vocalesDePalabra: list[str] = [];
+    for i in range (0, len(palabra)):
+       if perteneceLetraALista(vocales, palabra[i].upper()) and not perteneceLetraALista(vocalesDePalabra, palabra[i].upper()):
+        vocalesDePalabra.append(palabra[i].upper())
+
+    return len(vocalesDePalabra)>=3
+
+#Expected False.
+print(tiene_al_menos_tres_vocales("Casa"))
+#Expected True.
+print(tiene_al_menos_tres_vocales("Murciélago"))
+#Expected True.
+print(tiene_al_menos_tres_vocales("Computadora"))
