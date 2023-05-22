@@ -9,6 +9,8 @@
 
     s y e son de tipo in porque nos interesa el valor que tienen ambos, pero no se modifican a la salida.
 
+    22/5 se modificó el enunciado: Implementar al menos de 3 formas distintas éste problema
+
 """
 
 def pertenece(s: list[int], e: int) -> bool:
@@ -16,8 +18,26 @@ def pertenece(s: list[int], e: int) -> bool:
         if(s[i] == e): return True
     return False
 
+def pertenece_while(s: list[int], e: int) -> bool:
+    index = 0;
+    while(index < len(s)):
+        if(s[index] == e): return True
+        index+=1
+    return False
+
+def pertenece_recursividad(s: list[int], e:int) -> bool:
+    if(len(s) == 0): return False
+    elif(s[len(s)-1] == e): return True
+    else: 
+       s.pop()
+       return pertenece_recursividad(s, e)
+
+
+
 lista: list[int] = [10, 20, 30, 40]
-print(pertenece(lista, 30));
+print(pertenece(lista, 30)); 
+print("pertenece_while: " + str(pertenece_while(lista, 30)))
+print("pertenece_recursividad: " + str(pertenece_recursividad(lista, 30)))
 
 """
    2. problema divideATodos (in s:seq<Z>, in e: Z) : Bool {
