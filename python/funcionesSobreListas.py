@@ -119,7 +119,7 @@ print(es_palindroma('gasolina'))
 
 """
     7. Analizar la fortaleza de una contraseña. El parámetro de entrada sería un string con la contraseña a analizar, y la salida
-    otro string con tres posibles valores: VERDE, AMARILLA y ROJA. Nota: en python la “˜n/N” es considerado un caracter especial y no se comporta como cualquier otra letra.
+    otro string con tres posibles valores: VERDE, AMARILLA y ROJA. Nota: en python la “ñ/Ñ” es considerado un caracter especial y no se comporta como cualquier otra letra.
     
     La contraseña sería VERDE si:
         a) la longitud es mayor a 8 caracteres
@@ -138,11 +138,53 @@ print(es_palindroma('gasolina'))
     TODO: Investigar como en Python puedo validar si es minuscula o no sin utilizar funciones externas.
 """
 
+"""
+    ord('0') = 48
+    ord('9') = 57
+    ord('A') = 65
+    ord('Z') = 90
+    ord('Ñ') = 209
+    ord('a') = 97
+    ord('z') = 122
+    ord('ñ') = 241
+"""
 
+"""
+    limInf>= 48 && limInf<= 57 = Números
+    limInf>= 65 && limInf<= 90 = Mayúsculas
+    limInf>= 97 && limInf<= 122 = Minúsculas
+    especial: ord(a) == 209 or ord(b) == 241
+"""
+
+def tiene_elemento(palabra: str, limInf: int, limSup: int) -> bool:
+    index: int = 0;
+
+    while(index<len(palabra)):
+        if((ord(palabra[index])>=limInf and ord(palabra[index])<=limSup)): return True
+        index+=1
+
+    return False
 
 def fortaleza_de_contraseña(contrasenia: str) -> str:
-    if(len(contrasenia)<5): 'ROJA'
-    return "TODO"
+    if(len(contrasenia)<5): return 'ROJA'
+    elif(
+         len(contrasenia)>8 
+         and tiene_elemento(contrasenia, 97, 122) 
+         and tiene_elemento(contrasenia, 65, 90) 
+         and tiene_elemento(contrasenia, 48, 57)
+        ): return 'VERDE'
+    else: return 'AMARILLA'
+
+#Expected VERDE. (1 mayúscula, minúsculas y número y > 8 caracteres)
+print(fortaleza_de_contraseña('Hola, como andan 1'))
+#Expected ROJA (<5 caracteres)
+print(fortaleza_de_contraseña('H1ña'))
+#Expected AMARILLA (8 caracteres)
+print(fortaleza_de_contraseña('Hola a1ñ'))
+#TODO: Contemplar ñ. Ahora da amarilla porque no la contemplé
+#print(fortaleza_de_contraseña('Ññññññññññ'))
+
+
 
 """
     8. Dada una lista de tuplas, que representa un historial de movimientos en una cuenta bancaria, devolver el saldo actual.
@@ -167,6 +209,7 @@ print(historial_movimientos([("I", 2000), ("R", 20),("R", 1000),("I", 300)]))
     2) Creo lista para almacenar las vocales de la palabra (no se aceptan repetidas) por lo tanto, antes tengo que validar si pertenece.
     3) Si la cantidad de vocales es mayor o igual a 3, es true.
 """
+
 
 def perteneceLetraALista(s: list[str], e: str) -> bool:
     for i in range(0, len(s)):
