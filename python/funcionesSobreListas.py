@@ -403,17 +403,27 @@ def monedero_electronico() -> list[tuple[str, int]]:
     while(accion != 'X'):
         accion = input("¿Qué es lo que necesitás? \n 'C': Cargar Crédito \n 'D': Descontar créditos \n 'X': Salir \n: ");
         if(accion == 'C'):
-            montoACargar = input("¿Cuanto crédito querés cargar?: ");
-            montoACargar = int(montoACargar);
-            saldo = cargar_monedero(saldo, montoACargar);
-            historial = registrar_movimiento(historial, ("C", montoACargar))
+            resultado = realizar_accion(saldo, historial, 'C')
+            saldo = resultado[0] #Al usar función externa, como saldo es entero, se pasa por copia, pero yo quiero que lo manipule directamente. Por lo tanto, obtengo el resultado y se lo asigno a la variable local.
         elif(accion == 'D'):
-            montoADescontar = input("¿Cuantos créditos querés descontar?: ");
-            montoADescontar = int(montoADescontar);
-            saldo = descargar_monedero(saldo, montoADescontar);
-            historial = registrar_movimiento(historial, ("D", montoADescontar))
-
+            resultado = realizar_accion(saldo, historial, 'D')
+            saldo = resultado[0] #Al usar función externa, como saldo es entero, se pasa por copia, pero yo quiero que lo manipule directamente. Por lo tanto, obtengo el resultado y se lo asigno a la variable local.
+        
     return historial
+
+def realizar_accion(saldo: int, historial: list[tuple[str]], keyword: str) -> list[int, list[tuple[str]]]:
+    accion = 'cargar' if keyword == 'C' else 'descontar'
+    cantidadMonto = input("¿Cuanto crédito querés " + accion + "?: ")
+    cantidadMonto = int(cantidadMonto);
+
+    if(keyword == 'C'):
+        saldo = cargar_monedero(saldo, cantidadMonto)
+    else:
+        saldo = descargar_monedero(saldo, cantidadMonto);
+    
+    historial = registrar_movimiento(historial, (keyword, cantidadMonto))
+
+    return [saldo, historial]
 
 def cargar_monedero(saldo: int, montoACargar: int) -> int:
     return saldo + montoACargar
