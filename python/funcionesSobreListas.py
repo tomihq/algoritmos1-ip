@@ -268,3 +268,20 @@ def colocar_cero_en_posiciones_pares(lista: list[int]):
 
 #Expected 0, 2, 0, 4, 0
 print(colocar_cero_en_posiciones_pares([1, 2, 3, 4, 5,]))
+
+"""
+    2.Implementar la función del punto anterior pero esta vez sin modificar la lista original, devolviendo una nueva lista,
+    igual a la anterior pero con las posiciones pares en cero. Nota: La lista sería de tipo in.
+
+    Aquí, creo una variable que sea solamente de tipo out para retornar como respuesta.
+"""
+
+def colocar_cero_en_posiciones_pares_out(lista: list[int]):
+    copiaLista = lista.copy() #Otra opción podría ser llamar a una función que me extraiga los valores de la lista en esta nueva variable, recuerde NO HACER que copiaLista = lista  debido a que tendría la misma referencia en memoria, por lo tanto si modificamos una o la otra, se modifican ambas...
+    for i in range(0, len(copiaLista)):
+        if(i % 2 == 0):
+            copiaLista[i] = 0
+   
+    return copiaLista
+
+print(colocar_cero_en_posiciones_pares_out([1, 2, 3, 4, 5,]))
