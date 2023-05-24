@@ -295,7 +295,7 @@ Como la cadena original es in, debo crear otro parametro out que devuelva la lis
 
 #Como no puedo usar uppercase ni lowercase...
 def es_vocal(letra: str) -> bool:
-    vocales = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+    vocales = ["a", "á", "e", "é", "i", "í", "o", "ó", "u", "ú", "A", "Á", "E", "É", "I", "Í", "O", "Ó", "U", "Ú"]
     cantBusquedas = 0;
 
     while(cantBusquedas<len(vocales)):
@@ -312,4 +312,38 @@ def eliminar_vocales(palabra: str) -> str:
             palabraSinVocales += palabra[i]
     return palabraSinVocales
 
+#Expected "hl mnd"
 print(eliminar_vocales("hola mundo"))
+
+"""
+    4. problema reemplazaVocales (in s:seq<Char>) : seq<Char> {
+        requiere: { True }
+        asegura: { (∀i : Z)(0 ≤ i < |res| → (pertenece(<"a","e","i","o","u">, s[i]) ∧ res[i] = " ") ∨
+        (¬ pertenece(<"a","e","i","o","u">, s[i]) ∧ res[i] = s[i] ) ) }
+    }
+
+    Si es una vocal entonces en ese lugar coloco un "_" caso contrario, lo dejo igual.
+
+"""
+def reemplaza_vocales(palabra: str) -> str:
+    palabraConVocalesReemplazadas = ""
+    for i in range (0, len(palabra)):
+        if(not(es_vocal(palabra[i]))):
+            palabraConVocalesReemplazadas += palabra[i]
+        else:
+            palabraConVocalesReemplazadas += "_"
+    return palabraConVocalesReemplazadas
+
+#Expected h_l_ m_nd_
+print(reemplaza_vocales("hola mundo"))
+
+#Expected S_Y T_m_s
+print(reemplaza_vocales("SoY Tomás"))
+
+"""
+    5. problema daVueltaStr (in s:seq<Char>) : seq<Char> {
+        requiere: { True }
+        asegura: { (∀i : Z)(0 ≤ i < |res| → (res[i]=s[|s|-i-1]) }
+    }
+
+"""
