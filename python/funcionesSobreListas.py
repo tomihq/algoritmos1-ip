@@ -359,3 +359,25 @@ def daVueltaStr(s: str) -> str:
 
 #Expected "oy yos ,odnuM aloH"
 print(daVueltaStr("Hola Mundo, soy yo"))
+
+"""
+Ejercicio 3. Vamos a elaborar programas interactivos (usando la función input()) que nos permita solicitar al usuario
+información cuando usamos las funciones.
+"""
+
+"""
+    1. Implementar una función para construir una lista con los nombres de mis estudiantes. La función solicitará al usuario
+    los nombres hasta que ingrese la palabra “listo”. Devuelve la lista con todos los nombres ingresados.
+    while(palabra != "listo") -> Si se coloca otra cosa que no sea "listo" escrito de esa forma, lo agregará.
+    
+"""
+
+def construir_lista_estudiantes() -> list[str]:
+    listaEstudiantes = []
+    palabra = ""
+    while(palabra != 'listo'):
+        palabra = input("Ingrese el nombre del estudiante: ");
+        if(palabra != 'listo'): listaEstudiantes.append(palabra) 
+    return listaEstudiantes
+
+print(construir_lista_estudiantes())
