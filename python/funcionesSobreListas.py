@@ -347,3 +347,15 @@ print(reemplaza_vocales("SoY Tomás"))
     }
 
 """
+
+def daVueltaStr(s: str) -> str:
+    reversedString = ""
+    actualIndex = len(s)-1
+
+    while(actualIndex!=-1):
+        reversedString += s[actualIndex]
+        actualIndex-=1
+    return reversedString
+
+#Expected "oy yos ,odnuM aloH"
+print(daVueltaStr("Hola Mundo, soy yo"))
