@@ -251,3 +251,20 @@ print(tiene_al_menos_tres_vocales("Casa"))
 print(tiene_al_menos_tres_vocales("Murciélago"))
 #Expected True.
 print(tiene_al_menos_tres_vocales("Computadora"))
+
+"""
+    Ejercicio 2. Implementar las siguientes funciones sobre secuencias pasadas por parametro.
+"""
+"""
+    1. Implementar una funcion que dada una lista de numeros, en las POSICIONES PARES borra el valor original y coloca un cero.
+    (Véase que aquí estamos hablando de un parámetro in-out porque nos interesa su valor de entrada, y debemos modificarlo para la salida)
+"""
+
+def colocar_cero_en_posiciones_pares(lista: list[int]):
+    for i in range(0, len(lista)):
+        if(i % 2 == 0):
+            lista[i] = 0
+    return lista
+
+#Expected 0, 2, 0, 4, 0
+print(colocar_cero_en_posiciones_pares([1, 2, 3, 4, 5,]))
