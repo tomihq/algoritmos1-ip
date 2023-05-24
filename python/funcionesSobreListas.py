@@ -305,5 +305,11 @@ def es_vocal(letra: str) -> bool:
 
     return False
 
-def eliminar_vocales(palabra: str):
-    return 
+def eliminar_vocales(palabra: str) -> str:
+    palabraSinVocales = ""
+    for i in range (0, len(palabra)):
+        if(not(es_vocal(palabra[i]))):
+            palabraSinVocales += palabra[i]
+    return palabraSinVocales
+
+print(eliminar_vocales("hola mundo"))
