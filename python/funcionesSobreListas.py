@@ -237,7 +237,7 @@ def perteneceLetraALista(s: list[str], e: str) -> bool:
     return False
 
 vocales: list[str] = ["A", "E", "I", "O", "U"];
-def tiene_al_menos_tres_vocales(palabra: str):
+def tiene_al_menos_tres_vocales(palabra: str) -> bool:
     vocalesDePalabra: list[str] = [];
     for i in range (0, len(palabra)):
        if perteneceLetraALista(vocales, palabra[i].upper()) and not perteneceLetraALista(vocalesDePalabra, palabra[i].upper()):
@@ -260,7 +260,7 @@ print(tiene_al_menos_tres_vocales("Computadora"))
     (Véase que aquí estamos hablando de un parámetro in-out porque nos interesa su valor de entrada, y debemos modificarlo para la salida)
 """
 
-def colocar_cero_en_posiciones_pares(lista: list[int]):
+def colocar_cero_en_posiciones_pares(lista: list[int]) -> list[int]:
     for i in range(0, len(lista)):
         if(i % 2 == 0):
             lista[i] = 0
@@ -276,7 +276,7 @@ print(colocar_cero_en_posiciones_pares([1, 2, 3, 4, 5,]))
     Aquí, creo una variable que sea solamente de tipo out para retornar como respuesta.
 """
 
-def colocar_cero_en_posiciones_pares_out(lista: list[int]):
+def colocar_cero_en_posiciones_pares_out(lista: list[int]) -> list[int]:
     copiaLista = lista.copy() #Otra opción podría ser llamar a una función que me extraiga los valores de la lista en esta nueva variable, recuerde NO HACER que copiaLista = lista  debido a que tendría la misma referencia en memoria, por lo tanto si modificamos una o la otra, se modifican ambas...
     for i in range(0, len(copiaLista)):
         if(i % 2 == 0):
@@ -285,3 +285,25 @@ def colocar_cero_en_posiciones_pares_out(lista: list[int]):
     return copiaLista
 
 print(colocar_cero_en_posiciones_pares_out([1, 2, 3, 4, 5,]))
+
+"""
+3. Implementar una función que dada una cadena de texto de entrada (in) devuelva una cadena igual a la anterior, pero
+sin las vocales. Nota: No agrega espacios, sino que borra la vocal y concatena a continuación.
+
+Como la cadena original es in, debo crear otro parametro out que devuelva la lista modificada sin vocales.
+"""
+
+#Como no puedo usar uppercase ni lowercase...
+def es_vocal(letra: str) -> bool:
+    vocales = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
+    cantBusquedas = 0;
+
+    while(cantBusquedas<len(vocales)):
+        if(letra == vocales[cantBusquedas]): 
+            return True
+        cantBusquedas+=1
+
+    return False
+
+def eliminar_vocales(palabra: str):
+    return 
