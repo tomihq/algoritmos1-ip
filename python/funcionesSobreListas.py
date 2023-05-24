@@ -435,4 +435,28 @@ def registrar_movimiento(historial: list[tuple[str, int]], movimiento: tuple[str
     historial.append(movimiento);
     return historial
 
-print(monedero_electronico())
+""" print(monedero_electronico()) """
+
+"""
+    Ejercicio 4. Implementar las siguientes funciones sobre listas de listas:
+    1. problema perteneceACadaUno (in s:seq<seq<Z>>, in e:Z, out res: seq<Bool>) {
+         requiere: { True }
+        asegura: { (∀i : Z)(0 ≤ i < |res| → (res[i] = true ↔ pertenece(s[i],e)) ) }
+    }
+    Voy colocando True / False según si el elemento pertenece a la lista o no.
+
+    Notar que res es una nueva variable out, las demas no son modificadas pero si nos importa su valor.
+"""
+
+def perteneceACadaUno(s: list[list[int]], e: int) -> list[bool]:
+    res = [];
+
+    for i in range (0, len(s)):
+        if(pertenece(s[i],e)):
+            res.append(True)
+        else:
+            res.append(False)
+    
+    return res
+#Expected - [[False, False, True], [False, True, False, True], [False]] -> [True, True, False]
+print(perteneceACadaUno([[1, 2, 3], [4, 3, 6, 3], [1]], 3))
