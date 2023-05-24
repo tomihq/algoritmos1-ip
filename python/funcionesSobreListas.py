@@ -214,7 +214,7 @@ print(fortaleza_de_contraseña('Hola a1ñ'))
 """
 #Utilizo elif para evitar que me envien otra letra no reconocida y hacer una resta o suma cuando no corresponde.
 def historial_movimientos(movimientos: list[(str, int)]):
-    saldo = 0
+    saldo:int = 0
     for i in range (0, len(movimientos)):
         if(movimientos[i][0] == 'I'): saldo += movimientos[i][1]
         elif(movimientos[i][0] == 'R'): saldo -= movimientos[i][1]
@@ -277,7 +277,7 @@ print(colocar_cero_en_posiciones_pares([1, 2, 3, 4, 5,]))
 """
 
 def colocar_cero_en_posiciones_pares_out(lista: list[int]) -> list[int]:
-    copiaLista = lista.copy() #Otra opción podría ser llamar a una función que me extraiga los valores de la lista en esta nueva variable, recuerde NO HACER que copiaLista = lista  debido a que tendría la misma referencia en memoria, por lo tanto si modificamos una o la otra, se modifican ambas...
+    copiaLista: list[str] = lista.copy() #Otra opción podría ser llamar a una función que me extraiga los valores de la lista en esta nueva variable, recuerde NO HACER que copiaLista = lista  debido a que tendría la misma referencia en memoria, por lo tanto si modificamos una o la otra, se modifican ambas...
     for i in range(0, len(copiaLista)):
         if(i % 2 == 0):
             copiaLista[i] = 0
@@ -295,8 +295,8 @@ Como la cadena original es in, debo crear otro parametro out que devuelva la lis
 
 #Como no puedo usar uppercase ni lowercase...
 def es_vocal(letra: str) -> bool:
-    vocales = ["a", "á", "e", "é", "i", "í", "o", "ó", "u", "ú", "A", "Á", "E", "É", "I", "Í", "O", "Ó", "U", "Ú"]
-    cantBusquedas = 0;
+    vocales: list[str] = ["a", "á", "e", "é", "i", "í", "o", "ó", "u", "ú", "A", "Á", "E", "É", "I", "Í", "O", "Ó", "U", "Ú"]
+    cantBusquedas: int= 0;
 
     while(cantBusquedas<len(vocales)):
         if(letra == vocales[cantBusquedas]): 
@@ -306,7 +306,7 @@ def es_vocal(letra: str) -> bool:
     return False
 
 def eliminar_vocales(palabra: str) -> str:
-    palabraSinVocales = ""
+    palabraSinVocales:str = ""
     for i in range (0, len(palabra)):
         if(not(es_vocal(palabra[i]))):
             palabraSinVocales += palabra[i]
@@ -326,7 +326,7 @@ print(eliminar_vocales("hola mundo"))
 
 """
 def reemplaza_vocales(palabra: str) -> str:
-    palabraConVocalesReemplazadas = ""
+    palabraConVocalesReemplazadas:str = ""
     for i in range (0, len(palabra)):
         if(not(es_vocal(palabra[i]))):
             palabraConVocalesReemplazadas += palabra[i]
@@ -349,8 +349,8 @@ print(reemplaza_vocales("SoY Tomás"))
 """
 
 def daVueltaStr(s: str) -> str:
-    reversedString = ""
-    actualIndex = len(s)-1
+    reversedString:str = ""
+    actualIndex:int = len(s)-1
 
     while(actualIndex!=-1):
         reversedString += s[actualIndex]
@@ -369,15 +369,60 @@ información cuando usamos las funciones.
     1. Implementar una función para construir una lista con los nombres de mis estudiantes. La función solicitará al usuario
     los nombres hasta que ingrese la palabra “listo”. Devuelve la lista con todos los nombres ingresados.
     while(palabra != "listo") -> Si se coloca otra cosa que no sea "listo" escrito de esa forma, lo agregará.
-    
+
 """
 
 def construir_lista_estudiantes() -> list[str]:
-    listaEstudiantes = []
-    palabra = ""
+    listaEstudiantes: list[str] = []
+    palabra: str = ""
     while(palabra != 'listo'):
         palabra = input("Ingrese el nombre del estudiante: ");
         if(palabra != 'listo'): listaEstudiantes.append(palabra) 
     return listaEstudiantes
 
-print(construir_lista_estudiantes())
+""" print(construir_lista_estudiantes()) """
+"""
+    Implementar una función que devuelve una lista con el historial de un monedero electrónico (por ejemplo la SUBE).
+        El usuario debe seleccionar en cada paso si quiere:
+        “C” = Cargar créditos,
+        “D” = Descontar créditos,
+        “X” = Finalizar la simulación (terminar el programa).
+
+        En los casos de cargar y descontar créditos, el programa debe además solicitar el monto para la operación. Vamos a
+        asumir que el monedero comienza en cero. Para guardar la información grabaremos en el historial tuplas que representen
+        los casos de cargar (“C”, monto a cargar) y descontar crédito (“D”, monto a descontar).
+
+
+"""
+
+def monedero_electronico() -> list[tuple[str, int]]:
+    print("¡Bienvenido a su monedero electrónico!")
+    saldo: int = 0
+    historial: list[tuple[str, int]] = []
+    accion: str = ""
+    while(accion != 'X'):
+        accion = input("¿Qué es lo que necesitás? \n 'C': Cargar Crédito \n 'D': Descontar créditos \n 'X': Salir \n: ");
+        if(accion == 'C'):
+            montoACargar = input("¿Cuanto crédito querés cargar?: ");
+            montoACargar = int(montoACargar);
+            saldo = cargar_monedero(saldo, montoACargar);
+            historial = registrar_movimiento(historial, ("C", montoACargar))
+        elif(accion == 'D'):
+            montoADescontar = input("¿Cuantos créditos querés descontar?: ");
+            montoADescontar = int(montoADescontar);
+            saldo = descargar_monedero(saldo, montoADescontar);
+            historial = registrar_movimiento(historial, ("D", montoADescontar))
+
+    return historial
+
+def cargar_monedero(saldo: int, montoACargar: int) -> int:
+    return saldo + montoACargar
+
+def descargar_monedero(saldo: int, montoADescontar: int) -> int:
+    return saldo - montoADescontar
+
+def registrar_movimiento(historial: list[tuple[str, int]], movimiento: tuple[str, int]) -> list[tuple[str, int]]:
+    historial.append(movimiento);
+    return historial
+
+print(monedero_electronico())
