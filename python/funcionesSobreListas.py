@@ -404,17 +404,17 @@ def monedero_electronico() -> list[tuple[str, int]]:
         accion = input("¿Qué es lo que necesitás? \n 'C': Cargar Crédito \n 'D': Descontar créditos \n 'X': Salir \n: ");
         if(accion == 'C'):
             resultado = realizar_accion(saldo, historial, 'C')
-            saldo = resultado[0] #Al usar función externa, como saldo es entero, se pasa por copia, pero yo quiero que lo manipule directamente. Por lo tanto, obtengo el resultado y se lo asigno a la variable local.
+            saldo = resultado[0] 
         elif(accion == 'D'):
             resultado = realizar_accion(saldo, historial, 'D')
-            saldo = resultado[0] #Al usar función externa, como saldo es entero, se pasa por copia, pero yo quiero que lo manipule directamente. Por lo tanto, obtengo el resultado y se lo asigno a la variable local.
+            saldo = resultado[0] 
         
     return historial
 
 def realizar_accion(saldo: int, historial: list[tuple[str]], keyword: str) -> list[int, list[tuple[str]]]:
-    accion = 'cargar' if keyword == 'C' else 'descontar'
-    cantidadMonto = input("¿Cuanto crédito querés " + accion + "?: ")
-    cantidadMonto = int(cantidadMonto);
+    accion:str = 'cargar' if keyword == 'C' else 'descontar'
+    cantidadMonto:str = input("¿Cuanto crédito querés " + accion + "?: ")
+    cantidadMonto:int = int(cantidadMonto);
 
     if(keyword == 'C'):
         saldo = cargar_monedero(saldo, cantidadMonto)
