@@ -47,7 +47,11 @@ print(calcular_fragmento_mas_largo("T;"))
 
 #Expected 2 - Got: 1 
 print(calcular_fragmento_mas_largo("T;TO"));
+
+#Expected 3 - Got: 2
+print(calcular_fragmento_mas_largo("T;TO;TOM"))
 """
+Ej con segundo test: 
 Recorre hasta i = 3 pues recorre cuando i<len(T;TO)
 Primera ejecución: n = 0 f = 0 i = 0 -> n = 0 f = 1 i = 1
 Segunda ejecución: n = 0 f = 1 i = 1 -> n = 1 f = 0 i = 2
@@ -57,9 +61,11 @@ Podemos observar, que el problema es que se compara f = 1 con n = 1 y jamas entr
 
 Entonces, concluimos que el problema siempre toma la palabra anterior al punto y coma aunque la de la derecha sea mas larga.
 Esto se arreglaría añadiendo el primer if al final, luego de incrementar f por 1 si sigue en la misma palabra.
+¿La raíz del problema? Que la última palabra no termine con ";" debido a que si esto sucedería, nos daría una iteración más y el objetivo que queremos, pero el ";" solo va entre palabras.
+Ej: ("T;TO;TOM;" -> Ahí sí da 3, pero porque el ultimo caracter indica que termina la palabra y el ";" nos da el margen para contemplar que 3>2, aun así, el último caracter es ignorado para la última vuelta.
+Ej: "T;TO;TOM" -> Acá no da 3, porque el último caracter es ignorado para la última vuelta.
 """
-#Expected 3 - Got: 2
-print(calcular_fragmento_mas_largo("T;TO;TOM"))
+
 
 """
     Misma función, pero sin defectos:
