@@ -64,7 +64,7 @@ def clonarSinComentarios(nombre_archivo: str) -> None:
     archivoDestino = open("archivoSinComentarios.txt", "w", encoding="utf-8");  
     lineasArchivoNuevo: list[str] = []; 
     for i in file.readlines():
-        if(not(i[0] == "#")):
+        if(not(i.strip()[0] == "#")):
             lineasArchivoNuevo.append(i);
     file.close()
 
