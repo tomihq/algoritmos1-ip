@@ -45,3 +45,34 @@ def cantidadApariciones(nombre_archivo: str, palabra: str) -> int:
 
 #expected: 4
 print(cantidadApariciones("test.txt", "clases"))
+
+"""
+2. Dado un archivo de texto con comentarios, implementar una funci´on clonarSinComentarios(innombre archivo : str)
+que toma un archivo de entrada y genera un nuevo archivo que tiene el contenido original sin las l´ıneas comentadas. Para este
+ejercicio vamos a considerar comentarios como aquellas l´ıneas que tienen un caracter # como primer caracter de la l´ınea, o si no
+es el primer caracter, se cumple que todos los anteriores son espacios.
+Ejemplo:
+    # esto es un comentario
+    # esto tambien
+    esto no es un comentario # esto tampoco
+
+    Leo cada una de las lineas (las convierto en array para tener todas, accedo a la primera palabra y me fijo si es #)
+
+"""
+def clonarSinComentarios(nombre_archivo: str) -> None:
+    file:list[str] = open(nombre_archivo, "r", encoding="utf-8");
+    archivoDestino = open("archivoSinComentarios.txt", "w", encoding="utf-8");  
+    lineasArchivoNuevo: list[str] = []; 
+    for i in file.readlines():
+        if(not(i[0] == "#")):
+            lineasArchivoNuevo.append(i);
+    file.close()
+
+    for linea in lineasArchivoNuevo:
+        archivoDestino.write(linea)
+    
+    archivoDestino.close()
+    
+    
+
+print(clonarSinComentarios("archivoConComentarios.txt"))

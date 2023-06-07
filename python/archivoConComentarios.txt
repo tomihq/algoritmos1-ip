@@ -1,0 +1,5 @@
+#esto es un comentario
+hola #esto no es un comentario
+#bla bla bla
+esto tampoco es un comentario
+yes sirrr!
