@@ -274,3 +274,40 @@ def buscar_el_maximo_cola(c: Cola) -> int:
 
 """ print(buscar_el_maximo_cola(colocar_en_pila_nros_generados_azar(generar_nros_al_azar(1, 8, 12)))) """
 
+"""
+    Ejercicio 3.16
+
+    Bingo: un carton de bingo contiene 12 numeros al azar en el rango [0, 99].
+    1. implementar una funcion armarSecuenciaDeBingo() -> Cola[int] que genere una cola con los numeros del 0 al 99 ordenados
+    al azar.
+
+    2.implementar una funcion jugarCartonDeBingo(in carton : list[int], in bolillero : cola[int]) -> int que toma un carton
+    de Bingo y una cola de enteros (que corresponden a las bolillas numeradas) y determina cual es la cantidad de jugadas de
+    ese bolillero que se necesitan para ganar.
+"""
+
+def armar_secuencia_de_bingo() -> Cola[int]:
+    cola = Cola();
+    nrosAzar: list[int] = sample(range(0, 99+1), 100);
+    for i in range (0, len(nrosAzar)):
+        cola.put(nrosAzar[i]);
+    
+    return cola
+
+##El bingo se juega de la siguiente forma: Cantidad de jugadas iniciales 0, se hace un bolillero y vos tenes un carton. Se hace iteración del bolliero hasta que esté vacío, PERO si haciendo iteracion encuentro UN número que esté en el cartón ya gané en esa cantidad de jugadas.
+def jugar_carton_de_bingo(carton: list[int], bolillero: Cola[int]) -> int:
+    cantidadDeJugadas: int = 0;
+    gano: bool = False;
+    while(not(bolillero.empty()) | gano):
+        bolilla: int = bolillero.get();
+        if(pertenece(carton, bolilla)):
+            print("Ganó con cartón: " +str(carton));
+            print("Bolilla buscada en el momento: " +str(bolilla))
+            cantidadDeJugadas+=1
+            gano = True
+        else:
+            cantidadDeJugadas+=1
+
+    return cantidadDeJugadas
+
+print(jugar_carton_de_bingo([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], armar_secuencia_de_bingo()))
