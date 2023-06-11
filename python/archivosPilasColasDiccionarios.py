@@ -27,7 +27,7 @@ def existePalabra1(palabra: str, nombre_archivo: str) -> bool:
     file.close()
     return existePalabra
 
-print(existePalabra1("laboratorio", "test.txt"))
+""" print(existePalabra1("laboratorio", "test.txt")) """
 
 #1.1.3. una función cantidadApariciones(in nombre archivo : str, in palabra : str) → int que devuelve la cantidad de apariciones de una palabra en un archivo de texto
 def cantidadApariciones(nombre_archivo: str, palabra: str) -> int:
@@ -44,7 +44,7 @@ def cantidadApariciones(nombre_archivo: str, palabra: str) -> int:
     return cantidadAparicionesPalabra
 
 #expected: 4
-print(cantidadApariciones("test.txt", "clases"))
+""" print(cantidadApariciones("test.txt", "clases")) """
 
 """
 1.2. Dado un archivo de texto con comentarios, implementar una función clonarSinComentarios(innombre archivo : str)
@@ -75,7 +75,7 @@ def clonarSinComentarios(nombre_archivo: str) -> None:
     
     
 
-clonarSinComentarios("archivoConComentarios.txt")
+""" clonarSinComentarios("archivoConComentarios.txt") """
 
 """
 1. 3. Dado un archivo de texto, implementar una función que escribe un archivo nuevo (‘reverso.txt‘) que tiene las
@@ -103,7 +103,7 @@ def generar_archivo_inverso(nombre_archivo: str) -> None:
     archivoDestino.close()
     
 
-generar_archivo_inverso("archivoConComentarios.txt")
+""" generar_archivo_inverso("archivoConComentarios.txt") """
 
 """
     1.4. Dado un archivo de texto y una frase (es decir, texto que puede estar separado por "\n"), implementar una función que la agregue al final del archivo original (sin hacer una copia).
@@ -115,7 +115,7 @@ def agregar_frase_al_final(nombre_archivo: str, frase: str) -> None:
     file.writelines(frase.strip() +  "\n")
     file.close()
     
-agregar_frase_al_final("archivoConComentarios.txt", "Hello, world!\nThis is Frank Sinatra")
+""" agregar_frase_al_final("archivoConComentarios.txt", "Hello, world!\nThis is Frank Sinatra") """
 
 """
     1.5. idem, pero agregando la frase al comienzo del archivo original (de nuevo, sin hacer una copia del archivo).
@@ -152,7 +152,7 @@ def promedio_estudiante(lu: str) -> float:
     else:
         return 0
 
-print(promedio_estudiante("325/23"))
+""" print(promedio_estudiante("325/23")) """
 
 """
     Ejercicio 2.8: Implementar una función generarNrosAlAzar(in n : int, in desde : int, in hasta : int) → list[int] que genere
@@ -310,7 +310,7 @@ def jugar_carton_de_bingo(carton: list[int], bolillero: Cola[int]) -> int:
 
     return cantidadDeJugadas
 
-print(jugar_carton_de_bingo([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], armar_secuencia_de_bingo()))
+""" print(jugar_carton_de_bingo([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], armar_secuencia_de_bingo())) """
 
 
 """
@@ -330,7 +330,7 @@ def n_pacientes_urgentes(c: Cola[(int, str, str)]) -> int:
     return pacientesConPrioridad
 
 #Expected 3.
-print(n_pacientes_urgentes(colocar_en_cola(
+""" print(n_pacientes_urgentes(colocar_en_cola(
     [
      (1, "Lord Voldemort", "Cardiología"), 
      (2, "Ron Weasley", "Enfermería"),
@@ -338,4 +338,41 @@ print(n_pacientes_urgentes(colocar_en_cola(
      (3, "Hermione Granger", "Enfermería (petrificada)"),
      (7, "Peter Parker", "Kinesiología")
      ]
-)))
+))) """
+
+"""
+    Ejercicio 18. Leer un archivo de texto y agrupar la cantidad de palabras de acuerdo a su longitud. Implementar la función
+    agruparPorLongitud(in nombre archivo : str) → dict que devuelve un diccionario {longitud en letras : cantidad de palabras}.
+    Ej el diccionario
+    {
+        1: 2,
+        2: 10,
+        5: 4
+    }
+    indica que se encontraron 2 palabras de longitud 1, 10 palabras de longitud 2 y 5 palabras de longitud 4. Para este ejercicio
+    vamos a considerar palabras a todas aquellas secuencias de caracteres que no tengan espacios en blanco. 
+    Hello, everyone 12345678 sería: 
+    {
+        6: 1,
+        8: 2
+    }
+    1. Leo lineas del archivo. Por cada linea, hago un split para obtener cada palabra, separo por espacios, ahora, cada palabra tiene su propia longitud. Guardo por su longitud, el indice es decir algo de dict[lengthPalabra] +=1
+"""
+
+def agrupar_por_longitud(nombre_archivo: str) -> dict:
+    palabras_longitud:dict = {};
+    archivo = open(nombre_archivo, "r", encoding = 'utf-8');
+    for linea in archivo.readlines():
+        palabras = linea.split(" ");
+        for palabra in range (0, len(palabras)):
+             if len(palabras[palabra]) in palabras_longitud:  
+                palabras_longitud[len(palabras[palabra])] +=1
+             else:
+                palabras_longitud[len(palabras[palabra])] = 1  
+            
+
+    archivo.close();
+    return palabras_longitud
+
+
+print(agrupar_por_longitud("archivoSinComentarios.txt"))
