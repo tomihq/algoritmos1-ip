@@ -75,4 +75,56 @@ def clonarSinComentarios(nombre_archivo: str) -> None:
     
     
 
-print(clonarSinComentarios("archivoConComentarios.txt"))
+clonarSinComentarios("archivoConComentarios.txt")
+
+"""
+Ejercicio 3. Dado un archivo de texto, implementar una función que escribe un archivo nuevo (‘reverso.txt‘) que tiene las
+    mismas líneas que el original, pero en el orden inverso.
+    Ejemplo: si el archivo original es
+        Esta es la primer linea.
+        Y esta es la segunda.
+    debe generar:
+        Y esta es la segunda.
+        Esta es la primer linea.
+"""
+
+def generar_archivo_inverso(nombre_archivo: str) -> None:
+    file:list[str] = open(nombre_archivo, "r", encoding="utf-8");
+    archivoDestino = open("reverso.txt", "w", encoding="utf-8");  
+    lineasArchivoNuevo: list[str] = []; 
+    lineasEnReverso = file.readlines()[::-1]
+    for lineaArchivo in lineasEnReverso:
+        lineasArchivoNuevo.append(lineaArchivo);
+    file.close()
+
+    for linea in lineasArchivoNuevo:
+        archivoDestino.write(linea.strip() +  "\n") #el strip saca los espacios en blanco y por cada linea agrega un salto de linea para separarlas.
+    
+    archivoDestino.close()
+    
+
+generar_archivo_inverso("archivoConComentarios.txt")
+
+"""
+    Ejercicio 4. Dado un archivo de texto y una frase (es decir, texto que puede estar separado por "\n"), implementar una función que la agregue al final del archivo original (sin hacer una copia).
+
+"""
+
+def agregar_frase_al_final(nombre_archivo: str, frase: str) -> None:
+    file:list[str] = open(nombre_archivo, "a", encoding="utf-8");
+    file.writelines(frase.strip() +  "\n")
+    file.close()
+    
+agregar_frase_al_final("archivoConComentarios.txt", "Hello, world!\nThis is Frank Sinatra")
+
+"""
+    Ejercicio 5. idem, pero agregando la frase al comienzo del archivo original (de nuevo, sin hacer una copia del archivo).
+
+"""
+
+def agregar_frase_al_inicio(nombre_archivo: str, frase: str) -> None:
+    file:list[str] = open(nombre_archivo, "a", encoding="utf-8");
+    file.insert(frase.strip() +  "\n")
+    file.close()
+    
+agregar_frase_al_inicio("archivoConComentarios.txt", "Hello, world!\nThis is Frank Sinatra inicio")
