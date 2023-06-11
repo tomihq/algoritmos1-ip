@@ -229,12 +229,12 @@ Ejercicio 3. 13. Usando la función generarNrosAlAzar() definida en la sección 
 cola de enteros con los numeros generados al azar. Pueden usar la clase Queue() que es un ejemplo de una implementación básica:
 """
 from queue import Queue as Cola
-
-def colocar_en_cola_nros_generados_azar(nrosAzar: list[int]) -> Cola:
+                                    #Reutilizo para ejercicio 3.17
+def colocar_en_cola(lista: list[int] | list[(int, str, str)]) -> Cola:
         cola = Cola();
-        for i in range(0, len(nrosAzar)):
-            cola.put(nrosAzar[i])
-            """ Si se quiere probar que la cola tiene los elementos de la lista de nrosAzar. 
+        for i in range(0, len(lista)):
+            cola.put(lista[i])
+            """ Si se quiere probar que la cola tiene los elementos de la lista de lista. 
         while(not(cola.empty())):
             print(cola.get()) 
             """
@@ -311,3 +311,31 @@ def jugar_carton_de_bingo(carton: list[int], bolillero: Cola[int]) -> int:
     return cantidadDeJugadas
 
 print(jugar_carton_de_bingo([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], armar_secuencia_de_bingo()))
+
+
+"""
+    Ejercicio 17. Vamos a modelar una guardia de un hospital usando una cola donde se van almacenando los pedidos de atencion para los pacientes que van llegando. A cada paciente se le asigna una prioridad del 1 al 10 (donde la prioridad 1 es la mas urgente y requiere atencion inmediata) junto con su nombre y la especialidad medica que le corresponde.Implementar la funcion nPacientesUrgentes(in c : Cola[(int, str, str)]) -> int que devuelve la cantidad de pacientes de la cola que tienen prioridad en el rango [1, 3].
+
+    OJO: Acá está mal que sea in, como es una pila(internamente construida con una lista, JAMÁS una lista puede ser in porque es un tipo no primitivo, por lo tanto al ser por referencia siempre pero siempre va a ser inout)
+    Al no estar especificado, si no tiene elementos devuelvo -1 por defecto.
+"""
+
+def n_pacientes_urgentes(c: Cola[(int, str, str)]) -> int:
+    pacientesConPrioridad = 0;
+    while(not(c.empty())):
+        paciente = c.get();
+        if(paciente[0]>= 1 and paciente[0] <=3):
+            pacientesConPrioridad+=1
+
+    return pacientesConPrioridad
+
+#Expected 3.
+print(n_pacientes_urgentes(colocar_en_cola(
+    [
+     (1, "Lord Voldemort", "Cardiología"), 
+     (2, "Ron Weasley", "Enfermería"),
+     (5, "Harry Potter", "Pediatría"),
+     (3, "Hermione Granger", "Enfermería (petrificada)"),
+     (7, "Peter Parker", "Kinesiología")
+     ]
+)))
