@@ -356,7 +356,8 @@ def n_pacientes_urgentes(c: Cola[(int, str, str)]) -> int:
         6: 1,
         8: 2
     }
-    1. Leo lineas del archivo. Por cada linea, hago un split para obtener cada palabra, separo por espacios, ahora, cada palabra tiene su propia longitud. Guardo por su longitud, el indice es decir algo de dict[lengthPalabra] +=1
+    1. Leo lineas del archivo. Por cada linea, hago un split para obtener cada palabra, separo por espacios, ahora, cada palabra tiene su propia longitud. Guardo por su longitud, el indice es decir algo de dict[lengthPalabra] +=1.
+    Leo filas, luego cada palabra en particular.
 """
 
 def agrupar_por_longitud(nombre_archivo: str) -> dict:
@@ -375,4 +376,38 @@ def agrupar_por_longitud(nombre_archivo: str) -> dict:
     return palabras_longitud
 
 
-print(agrupar_por_longitud("archivoSinComentarios.txt"))
+""" print(agrupar_por_longitud("archivoSinComentarios.txt")) """
+
+
+"""
+Ejercicio 19. Volver a implementar la función que calcula el promedio de las notas de los alumnos, pero ahora devolver un
+diccionario {libreta_universitaria : promedio} con los promedios de todos los alumnos.
+La forma más rapida de usar un diccionario en este caso, para ir ordenando los datos sería: 
+{
+    "LU" : {sumaDeNotas: 20, cantidadDeNotas:2}
+} entonces el promedio de un LU en particular es [LU]["sumaDeNotas"]/[LU]["cantidadDeNotas"]
+"""
+
+
+def promedios_estudiantes_dict() -> dict:
+    notas = open("./assets/notas2023.csv", "r", encoding = 'utf-8-sig'); #sig quita los caracteres tipo: \ufeff
+    alumnos:dict[str: dict: {str: float, str: float}] = {};
+    promedioAlumno = {};
+
+    for i in notas.readlines():
+        filas: list[str] = i.split(";")
+        ##filas[0] posee el LU de cada alumno
+        if(not(filas[0]) in alumnos):
+                alumnos[filas[0]] = {"sumaDeNotas": float(filas[3]), "cantidadDeNotas": 1}
+        else:
+                alumnos[filas[0]]["sumaDeNotas"] += float(filas[3]);
+                alumnos[filas[0]]["cantidadDeNotas"]+=1  
+
+    for alumno in alumnos.items():
+        promedioAlumno[alumno[0]] = alumno[1]["sumaDeNotas"] / alumno[1]["cantidadDeNotas"];  
+    
+    return promedioAlumno;
+
+
+
+print(promedios_estudiantes_dict())
