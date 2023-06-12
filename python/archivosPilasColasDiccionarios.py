@@ -408,6 +408,4 @@ def promedios_estudiantes_dict() -> dict:
     
     return promedioAlumno;
 
-
-
-print(promedios_estudiantes_dict())
+""" print(promedios_estudiantes_dict()) """
