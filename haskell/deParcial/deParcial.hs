@@ -34,3 +34,14 @@ eliminarYContarRep l = (eliminarRepetidos l, eliminarYContarRepAux (eliminarRepe
 eliminarYContarRepAux :: (Eq t) => [t] -> [t] -> [(t, Int)]
 eliminarYContarRepAux [] _ = []
 eliminarYContarRepAux (x:xs) lista = (x, (cantApariciones x lista) - 1) : eliminarYContarRepAux xs lista
+
+
+{- funcion [("B", "D"), ("A", "F")] ["B", "A"] -}
+funcion :: [(Char, Char)] -> [Char] -> [Char]
+funcion lista empiezaTuplas | length empiezaTuplas == 0 = []
+                            | otherwise = funcion2 lista (head empiezaTuplas) ++ funcion lista (tail empiezaTuplas) 
+
+funcion2 :: [(Char, Char)] -> Char -> [Char]
+funcion2 lista empiezaTupla | length lista == 0 = []
+                            | fst(head(lista)) == empiezaTupla = snd(head(lista)) : funcion2 (tail lista) empiezaTupla
+                            | otherwise = funcion2 (tail lista) empiezaTupla
