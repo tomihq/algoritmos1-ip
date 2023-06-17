@@ -43,7 +43,7 @@ def procesamiento_pedidos(pedidos: Queue,
 
 
 """ 
-TESTS PORQUE FALLA CMS NO SÉ PORQUE
+TESTS PORQUE FALLA CMS NO SÉ PORQUE -> Andaba mal plataforma. Esta solucion da 100/100
 1. 
 pedidos = Queue()
 pedidos.put({"id": 21, "cliente": "Gabriela", "productos": {"Manzana": 1}})
