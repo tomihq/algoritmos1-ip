@@ -46,14 +46,17 @@ def avanzarFila(fila: Queue, min: int):
 
 
     else: 
+        #Prioridad C1
         if(tiempo >= comienzaCajaUno and tiempo % atiendeCajaUnoCada == 1 and fila.qsize() >0):
           fila.get();
     
         else: 
+          #Prioridad C2
           if(tiempo>=comienzaCajaDos and tiempo % atiendaCajaDosCada == 3 and fila.qsize() >0):
             fila.get();
     
           else:
+            #Prioridad C3
             if(tiempo>=comienzaCajaTres and tiempo % atiendeCajaTresCada == 2 and fila.qsize() >0):
             #acá es donde no resuelve.
               clienteNoResuelto = fila.get();
@@ -68,11 +71,6 @@ def avanzarFila(fila: Queue, min: int):
   listaFila = list(fila.queue)
   return listaFila
 
-""" queue = Queue()
-queue.put(1)
-queue.put(2)
-queue.put(3)
-print(avanzarFila(queue, 13)); """
 
 if __name__ == '__main__':
   fila: Queue = Queue()
